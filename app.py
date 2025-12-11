@@ -1009,7 +1009,7 @@ def find_matching_unit(extracted_name: str, unit_type: str, registry: dict) -> d
     # Second pass: check previous names
     for unit in registry_list:
         previous = unit.get("previous_names", "")
-        if previous:
+        if previous and isinstance(previous, str):
             prev_list = [p.strip().lower() for p in previous.split(";")]
             if extracted_lower in prev_list:
                 return {"match": unit, "match_type": "previous_name", "confidence": "high"}

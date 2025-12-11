@@ -39,7 +39,8 @@ except ImportError:
 st.set_page_config(
     page_title="Assessment Report Analyzer | UTA",
     page_icon="📊",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 # ============================================================================
@@ -61,45 +62,19 @@ UTA_CSS = """
         --text-muted: #8896a6;
     }
     
-    /* Hide default Streamlit elements but KEEP sidebar toggle */
+    /* Hide Streamlit branding but KEEP navigation controls */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     
-    /* SIDEBAR TOGGLE BUTTON - ensure it's always visible */
-    [data-testid="collapsedControl"],
-    [data-testid="stSidebarCollapsedControl"],
-    button[kind="header"],
-    .css-1rs6os {
-        display: flex !important;
+    /* IMPORTANT: Make sure sidebar toggle is always visible */
+    button[kind="header"] {
         visibility: visible !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-    }
-    
-    [data-testid="collapsedControl"] {
-        color: var(--uta-dark-blue) !important;
-        background-color: white !important;
-        border: 1px solid var(--border-color) !important;
-        border-radius: 6px !important;
-        padding: 0.5rem !important;
-        margin: 0.5rem !important;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
-    }
-    
-    [data-testid="collapsedControl"]:hover {
-        background-color: var(--sidebar-bg) !important;
-        border-color: var(--uta-blue) !important;
-    }
-    
-    [data-testid="collapsedControl"] svg {
-        stroke: var(--uta-dark-blue) !important;
-        width: 20px !important;
-        height: 20px !important;
+        display: block !important;
     }
     
     /* Remove top padding */
     .block-container {
-        padding-top: 1rem;
+        padding-top: 2rem;
         padding-bottom: 1rem;
         max-width: 100%;
     }
@@ -2398,65 +2373,30 @@ def main():
     
     # Main content area based on current page
     
-    # Add sidebar toggle button (JavaScript-based)
+    # Prominent Menu button to restore sidebar if hidden
     st.markdown("""
     <style>
-        .sidebar-toggle-btn {
-            position: fixed;
-            top: 0.75rem;
-            left: 0.75rem;
-            z-index: 999999;
-            background-color: white;
-            border: 1px solid #e1e5eb;
-            border-radius: 6px;
-            padding: 0.5rem 0.75rem;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            color: #003865;
-            font-weight: 500;
+        /* Style the menu button */
+        [data-testid="stButton"] button:has([data-testid="stMarkdownContainer"]) {
+            background-color: var(--uta-dark-blue) !important;
+            color: white !important;
         }
-        .sidebar-toggle-btn:hover {
-            background-color: #f0f4f8;
-            border-color: #0064b1;
+        div[data-testid="column"]:first-child button {
+            background-color: #003865 !important;
+            color: white !important;
+            border: none !important;
+            font-weight: 500 !important;
         }
-        .sidebar-toggle-btn svg {
-            width: 18px;
-            height: 18px;
+        div[data-testid="column"]:first-child button:hover {
+            background-color: #0064b1 !important;
         }
     </style>
-    <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-        Menu
-    </button>
-    <script>
-        function toggleSidebar() {
-            const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-            const collapsed = window.parent.document.querySelector('[data-testid="collapsedControl"]');
-            
-            if (sidebar) {
-                const currentTransform = sidebar.style.transform;
-                if (currentTransform === 'translateX(-100%)' || sidebar.getAttribute('aria-expanded') === 'false') {
-                    sidebar.style.transform = 'translateX(0)';
-                    sidebar.setAttribute('aria-expanded', 'true');
-                } else {
-                    sidebar.style.transform = 'translateX(-100%)';
-                    sidebar.setAttribute('aria-expanded', 'false');
-                }
-            }
-            
-            // Also try clicking the native toggle if it exists
-            if (collapsed) {
-                collapsed.click();
-            }
-        }
-    </script>
     """, unsafe_allow_html=True)
+    
+    menu_col1, menu_col2 = st.columns([1, 11])
+    with menu_col1:
+        if st.button("☰ Menu", key="show_menu_btn"):
+            st.rerun()
     
     if st.session_state["current_page"] == "analyze":
         render_analyze_page(api_key, access_token, ms_drive_id, ms_item_id, excel_connected, registry)

@@ -1,0 +1,129 @@
+unit_id,canonical_name,college_dept,unit_type,previous_names,active
+AA-A1C05A,CAAS - Center for African American Studies,AA,Administrative,,Yes
+AA-7A60F0,University Libraries,AA,Administrative,,Yes
+AA-7FDFD8,Graduate School,AA,Administrative,,Yes
+AA-71991F,Fort Worth Center,AA,Administrative,,Yes
+AA-823C71,Institutional Effectiveness and Reporting,AA,Administrative,,Yes
+AA-CB14C7,Faculty Success,AA,Administrative,,Yes
+AA-A355DE,CMAS - Center for Mexican American Studies,AA,Administrative,,Yes
+ACCT-5F99DE,Accounting Improvement Report,ACCT,Administrative,,Yes
+ACO-E80336,Mav Express,ACO,Administrative,,Yes
+ACO-899069,Parking and Transportation Services,ACO,Administrative,,Yes
+ACO-C1DD02,Police Department,ACO,Administrative,,Yes
+ACO-211FB8,Special Events Facilities,ACO,Administrative,,Yes
+ACO-5BEA07,Sustainability,ACO,Administrative,,Yes
+ACO-F79C56,Housing,ACO,Administrative,,Yes
+ACO-5679BE,Environmental Health & Safety,ACO,Administrative,,Yes
+ACO-230CC6,Facilities Management,ACO,Administrative,,Yes
+ACO-F5A687,University Center,ACO,Administrative,,Yes
+ACO-60CA82,University Compliance,ACO,Administrative,,Yes
+BAC-D74C63,University Analytics,BAC,Administrative,,Yes
+BAC-D829AD,Information Security Office,BAC,Administrative,,Yes
+BAC-76452D,Business Services,BAC,Administrative,,Yes
+BAC-D1DA0C,Business Affairs and Controller,BAC,Administrative,,Yes
+BAC-47E3D4,"Budgets, Planning & Analysis",BAC,Administrative,,Yes
+BIOL-6F050C,Biology,BIOL,Administrative,,Yes
+BSAD-05116D,Business Administration Improvement Report,BSAD,Administrative,,Yes
+CAPPA-E63375,Architecture Improvement Report,CAPPA,Administrative,,Yes
+CAPPA-83A205,"College of Architecture, Planning  and Public Affairs",CAPPA,Administrative,,Yes
+CE-A52C00,Civil Engineering,CE,Administrative,,Yes
+CHEM-953B77,Chem and Biochem,CHEM,Administrative,,Yes
+COB-4B80D9,College of Business,COB,Administrative,,Yes
+COE-98AD93,Bioengineering,COE,Administrative,,Yes
+COE-89BFD5,Electrical Engineering,COE,Administrative,,Yes
+COE-F7EB53,Materials Science Engineering,COE,Administrative,,Yes
+COE-D9ED64,College of Engineering,COE,Administrative,,Yes
+COE-A3FF12,Civil Engineering,COE,Administrative,,Yes
+COE-723CFF,COE Improvement Report,COE,Administrative,,Yes
+COE-1696CC,Computer Science and Engineering,COE,Administrative,,Yes
+COE-DF6891,"Industrial, Manufacturing, and Systems Engineering",COE,Administrative,,Yes
+COED-9494F4,College of Education,COED,Administrative,,Yes
+COED-D5A61B,HEALOS,COED,Administrative,,Yes
+COED-3E1439,TAP,COED,Administrative,,Yes
+COLA-71F9AA,Sociology and Anthropology,COLA,Administrative,,Yes
+COLA-E0D192,Modern Languages,COLA,Administrative,,Yes
+COLA-58CA94,Art and Art History,COLA,Administrative,,Yes
+COLA-463B20,English Language Institute,COLA,Administrative,,Yes
+COLA-A378B9,Communication,COLA,Administrative,,Yes
+COLA-4D131E,Linguistics and TESOL,COLA,Administrative,,Yes
+COLA-BC418C,Music,COLA,Administrative,,Yes
+COLA-0B9B1E,Theatre Arts and Dance,COLA,Administrative,,Yes
+COLA-BFC231,History,COLA,Administrative,,Yes
+COLA-3B30FA,Political Science,COLA,Administrative,,Yes
+COLA-4E1C40,English,COLA,Administrative,,Yes
+COLA-7BE120,Writing Center,COLA,Administrative,,Yes
+COLA-8D9FAA,Philosophy and Humanities,COLA,Administrative,,Yes
+COLA-F1C582,College of Liberal Arts,COLA,Administrative,,Yes
+COLA-083CF9,Criminology and Criminal Justice,COLA,Administrative,,Yes
+COMM-A36104,Communication,COMM,Administrative,,Yes
+CONHI-300072,College of Nursing and Health Innovation,CONHI,Administrative,,Yes
+CONHI-E884D9,Undergraduate Nursing Improvement Report,CONHI,Administrative,,Yes
+CONHI-3DFAD5,Graduate Nursing Improvement Report,CONHI,Administrative,,Yes
+CONHI-40816F,Kinesiology Improvement Report,CONHI,Administrative,,Yes
+COS-C8CD93,Physics,COS,Administrative,,Yes
+COS-DFB9D7,Earth and Environmental Sciences,COS,Administrative,,Yes
+COS-BE5E34,Mathematics,COS,Administrative,,Yes
+COS-B18A99,Chemistry and Biochemistry,COS,Administrative,,Yes
+COS-175BDD,Planetarium,COS,Administrative,,Yes
+COS-840F68,Psychology,COS,Administrative,,Yes
+COS-215FC5,College of Science,COS,Administrative,,Yes
+CRCJ-4B1981,Criminology and Criminal Justice,CRCJ,Administrative,,Yes
+CSE-B359D8,Computer Science and Engineering,CSE,Administrative,,Yes
+DAR-36E262,Development & Alumni Relations,DAR,Administrative,,Yes
+DSS-8834C7,Division of Student Success,DSS,Administrative,,Yes
+ECON-BAC09C,Economics Improvement Report,ECON,Administrative,,Yes
+EE-BCC691,Electrical Engineering,EE,Administrative,,Yes
+EM-129DED,Enrollment Systems,EM,Administrative,,Yes
+EM-21848B,University Recruiting,EM,Administrative,,Yes
+EM-3AAD72,Financial Aid & Scholarships,EM,Administrative,,Yes
+EM-592BF1,Office of the Registrar,EM,Administrative,,Yes
+EM-30D705,TRIO Pre-College Programs,EM,Administrative,,Yes
+EM-60BFFD,Outreach and Community Engagement,EM,Administrative,,Yes
+FINA-D453BF,Finance and Real Estate Improvement Report,FINA,Administrative,,Yes
+GE-0C5A26,Enterprise Development,GE,Administrative,,Yes
+GE-E3DA49,Extension and Extended Campus,GE,Administrative,,Yes
+GE-4932B3,Distance Education,GE,Administrative,,Yes
+HC-7D7B79,Honors College (Admin),HC,Administrative,,Yes
+HIST-84F37D,History and Geography,HIST,Administrative,,Yes
+IMSE-C03C60,Industrial Manufacturing and Systems Engineering,IMSE,Administrative,,Yes
+ISOM-80E8C0,Information Systems and Operations Management (Improvement Report),ISOM,Administrative,,Yes
+LA-290DDA,Landscape Architecture (Improvement Report),LA,Administrative,,Yes
+LING-586C4A,Linguistics and TESOL,LING,Administrative,,Yes
+MAE-7B9AA6,Mechanical and Aerospace Engineering,MAE,Administrative,,Yes
+MANA-A079F9,Management Improvement Report,MANA,Administrative,,Yes
+MARK-19833C,Marketing Improvement Report,MARK,Administrative,,Yes
+MATH-0264C7,Mathematics,MATH,Administrative,,Yes
+MME-700EB4,"Marketing, Messaging and Engagement (Formerly University Communications)",MME,Administrative,,Yes
+MODL-CF1C82,Modern Languages,MODL,Administrative,,Yes
+OIT-BD55E8,Infrastructure and Operations,OIT,Administrative,,Yes
+OIT-D646FF,Innovation and Research,OIT,Administrative,,Yes
+OIT-2A7E1C,Planning and Management,OIT,Administrative,,Yes
+PAPL-3967DB,Public Affairs & Planning (Improvement Report),PAPL,Administrative,,Yes
+PHIL-216187,Philosophy and Humanities,PHIL,Administrative,,Yes
+PHYS-DCA750,Physics,PHYS,Administrative,,Yes
+PRES-4FB0AE,Athletics,PRES,Administrative,,Yes
+PRES-0B47FA,Legal Affairs,PRES,Administrative,,Yes
+PSYC-B50DAD,Psychology,PSYC,Administrative,,Yes
+RSCH-4EA177,Research Administration,RSCH,Administrative,,Yes
+RSCH-09EB55,McNair Scholars Program,RSCH,Administrative,,Yes
+SA-E45B6F,Fraternity and Sorority Life,SA,Administrative,,Yes
+SA-A81FB8,Community Standards,SA,Administrative,,Yes
+SA-8CB0EA,Office of International Education,SA,Administrative,,Yes
+SA-3F2E04,Campus Recreation,SA,Administrative,,Yes
+SA-F4D874,Student Access & Resource Center - SAR Center,SA,Administrative,,Yes
+SA-DE9FA2,Veteran Services,SA,Administrative,,Yes
+SA-1F1A3E,Student Publications,SA,Administrative,,Yes
+SA-A0C747,Follett Student Leadership Center,SA,Administrative,,Yes
+SA-0B50B8,Student Governance,SA,Administrative,,Yes
+SA-FECAB3,Student Organizations,SA,Administrative,,Yes
+SA-418CE9,Student Advocacy Services,SA,Administrative,,Yes
+SA-5CFA2E,Student Activities,SA,Administrative,,Yes
+SA-6F6219,Career Development Center,SA,Administrative,,Yes
+SA-7BA083,Intercultural Student Engagement Center,SA,Administrative,,Yes
+SA-64640D,Apartment and Residence Life,SA,Administrative,,Yes
+SA-8DA6C9,Transition Programs & Services,SA,Administrative,,Yes
+SA-168D9E,Counseling and Psychological Services,SA,Administrative,,Yes
+SA-B8406D,New Maverick Orientation,SA,Administrative,,Yes
+SA-DE0F6D,Health Services,SA,Administrative,,Yes
+SSW-D81031,School of Social Work,SSW,Administrative,,Yes
+TCE-8C78E9,"Office of Talent, Culture, and Engagement",TCE,Administrative,,Yes

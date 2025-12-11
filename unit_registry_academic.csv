@@ -1,0 +1,200 @@
+unit_id,canonical_name,college_dept,unit_type,previous_names,active
+ACCT-663ED1,Accounting - Accounting BBA,ACCT,Academic,,Yes
+ACCT-985A87,Accounting - Accounting/Professional Accounting MPACC,ACCT,Academic,,Yes
+ACCT-F06C3E,Accounting - Taxation MS,ACCT,Academic,,Yes
+ARCH-B8FB33,Interior Design BS,ARCH,Academic,,Yes
+ARCH-4B9866,Architecture BS,ARCH,Academic,,Yes
+ARCH-99F368,Architecture MARCH,ARCH,Academic,,Yes
+ARCH-B89DA1,Architecture History Minor,ARCH,Academic,,Yes
+ART-FF48CC,Art and Art History - Art BA,ART,Academic,,Yes
+ART-0DFBCA,Art and Art History - Art BFA,ART,Academic,,Yes
+ART-D9E105,Art and Art History - Art MFA,ART,Academic,,Yes
+ART-4703B3,Art and Art History - Art History BA,ART,Academic,,Yes
+BE-DBA655,Bioengineering - Biomedical Engineering BS,BE,Academic,,Yes
+BE-0AD84F,Bioengineering - Biomedical Engineering MS,BE,Academic,,Yes
+BE-F24F15,Bioengineering - Biomedical Engineering PhD,BE,Academic,,Yes
+BIOL-E2D9C5,Biology - Biology BA/BS,BIOL,Academic,,Yes
+BIOL-97DDD6,Biology - Biology MS,BIOL,Academic,,Yes
+BIOL-B2CCCA,Biology - Medical Laboratory Sciences BS,BIOL,Academic,,Yes
+BIOL-FE045A,Biology - Microbiology BS,BIOL,Academic,,Yes
+BIOL-9A6137,Biology - Quantitative Biology PhD,BIOL,Academic,,Yes
+BSAD-A029AE,Business Administration Core BBA (On-campus and FWC),BSAD,Academic,,Yes
+BSAD-9587C3,"Business Administration MBA (On-campus, Online, and FWC)",BSAD,Academic,,Yes
+BSAD-ADB9A4,Business Administration EMBA (FWC),BSAD,Academic,,Yes
+BSAD-FE72F0,Business Administration EMBA (Asia),BSAD,Academic,,Yes
+BSAD-A8072D,Business Administration PhD,BSAD,Academic,,Yes
+CAAS-2AED4D,Center for African American Studies - African American Studies Minor,CAAS,Academic,,Yes
+CE-73AEE8,Civil Engineering - Architectural Engineering BSAE,CE,Academic,,Yes
+CE-00B0F8,Civil Engineering - Construction Management BSCM,CE,Academic,,Yes
+CE-D2C15B,Civil Engineering - Civil Engineering PhD,CE,Academic,,Yes
+CE-EC88E7,Civil Engineering - Construction Management MCM (on-campus & Online),CE,Academic,,Yes
+CE-C535EB,Civil Engineering - Civil Engineering BSCE,CE,Academic,,Yes
+CE-92D0EE,Civil Engineering - Civil Engineering MS/MENGR (On-Campus and Online),CE,Academic,,Yes
+CHEM-ECA2D4,Chem and Biochem - Chemistry MS,CHEM,Academic,,Yes
+CHEM-DAF048,Chem and Biochem - Chemistry PhD,CHEM,Academic,,Yes
+CHEM-39F08F,Chem and Biochem - Chem/Biochem/Biological Chem BA BS,CHEM,Academic,,Yes
+CMAS-B552C5,Center for Mexican American Studies - Mexican American & Latina/O Studies Minor,CMAS,Academic,,Yes
+COB-88B401,Healthcare Administration MS (FWC),COB,Academic,,Yes
+COLA-B097EA,Applied Arts and Sciences BAAS,COLA,Academic,,Yes
+COLA-DAF170,Interdisciplinary Studies BAIS/BSIS,COLA,Academic,,Yes
+COLA-B6C480,"Gender, Women & Sexuality Studies Program Certificate",COLA,Academic,,Yes
+COLA-ADB1C0,"Gender, Women & Sexuality Studies Program Minor",COLA,Academic,,Yes
+COLA-3F9475,Disability Studies Minor,COLA,Academic,,Yes
+COMM-04C499,Communication - Communication BA,COMM,Academic,,Yes
+COMM-D9547F,Communication - Communication MA,COMM,Academic,,Yes
+COMM-D3696A,Communication - Philanthropy BA,COMM,Academic,,Yes
+CONHI-630092,Graduate Nursing - Nursing Practice DNP (On-campus and Online),CONHI,Academic,,Yes
+CONHI-0C6CFF,Graduate Nursing - Healthcare Informatics MSN,CONHI,Academic,,Yes
+CONHI-B10EB3,Undergraduate Nursing - Telehealth & Health Informatics Certificate,CONHI,Academic,,Yes
+CONHI-EE11A7,Graduate Nursing - Graduate Gerontology Healthcare Certificate,CONHI,Academic,,Yes
+CONHI-2B365E,Graduate Nursing - Nurse Practitioner MSN (On-campus and Online),CONHI,Academic,,Yes
+CONHI-A92A56,"Undergraduate Nursing - Nursing BSN (On-campus, Online, and FWC)",CONHI,Academic,,Yes
+CONHI-7C55B3,"Graduate Nursing - Healthcare Informatics Certificate (Post Graduate, Online Only)",CONHI,Academic,,Yes
+CONHI-273DCD,Graduate Nursing - Nursing Education MSN (Online only),CONHI,Academic,,Yes
+CONHI-42BDFB,Graduate Nursing - Nursing Science PhD,CONHI,Academic,,Yes
+CONHI-A5DB2F,Graduate Nursing - Certificate in Rural Health,CONHI,Academic,,Yes
+CONHI-E37371,Undergraduate Nursing - Certificate in Rural Health,CONHI,Academic,,Yes
+CONHI-65DB48,Graduate Nursing - Nursing Administration MSN (Online),CONHI,Academic,,Yes
+CONHI-36B1BE,"Undergraduate Nursing - Nursing BSN (On-campus, Online, FWC)",CONHI,Academic,,Yes
+COS-4DC6A5,Applied Statistics and Data Science MS,COS,Academic,,Yes
+COS-32F1DF,Data Science BS,COS,Academic,,Yes
+CRCJ-125983,Criminology and Criminal Justice - Criminology and Criminal Justice BA,CRCJ,Academic,,Yes
+CRCJ-AC92D7,Criminology and Criminal Justice - Criminology and Criminal Justice MA (On-campus and 100% Online),CRCJ,Academic,,Yes
+CRCJ-A33E8F,Criminology and Criminal Justice - Forensics Applications of Science and Technology Minor,CRCJ,Academic,,Yes
+CRCJ-5B96CB,"Criminology and Criminal Justice - Law & Legal Studies, Minor",CRCJ,Academic,,Yes
+CSE-AD60F2,CSE - Data Science MS,CSE,Academic,,Yes
+CSE-E51C51,CSE - Computer Engineering MS,CSE,Academic,,Yes
+CSE-9F8DAA,CSE - Computer Engineering PhD,CSE,Academic,,Yes
+CSE-F0AF47,CSE - Computer Science MS,CSE,Academic,,Yes
+CSE-B2BA55,CSE - Computer Science PhD,CSE,Academic,,Yes
+CSE-26622C,CSE - Software Engineering MSWENGR,CSE,Academic,,Yes
+CSE-5E31A3,CSE - Computer Engineering BSCE,CSE,Academic,,Yes
+CSE-812D82,CSE - Computer Science BSCS,CSE,Academic,,Yes
+CSE-7AA475,CSE - Software Engineering BS,CSE,Academic,,Yes
+DSS-D8308B,University Studies BS (On-campus and Online),DSS,Academic,,Yes
+ECON-BB1F74,Economics - Economics BS/BBA,ECON,Academic,,Yes
+ECON-EF5E36,Economics - Economic Data Analytics MS,ECON,Academic,,Yes
+EE-F1FD4A,Electrical Engineering - Electrical Eng BSEE,EE,Academic,,Yes
+EE-71E93D,Electrical Engineering - Electrical Eng MS/MENGR (On-campus and Online),EE,Academic,,Yes
+EE-71D951,Electrical Engineering - Electrical Eng PhD,EE,Academic,,Yes
+EE-344013,Electrical Engineering - Resource and Energy Eng BS,EE,Academic,,Yes
+ENGL-F0946A,English - English BA,ENGL,Academic,,Yes
+ENGL-EFA8F8,English - English MA,ENGL,Academic,,Yes
+ENGL-2F14F3,English - English PhD,ENGL,Academic,,Yes
+ENGL-7584D0,English - Sound Studiers Minor,ENGL,Academic,,Yes
+ENGR-3ED4EE,Sustainable Engineering Minor,ENGR,Academic,,Yes
+ENGR-D6E0A9,Nuclear Engineering Minor,ENGR,Academic,,Yes
+EVSE-5BAC25,Environ and Earth Sci - Geoinformatics BS,EVSE,Academic,,Yes
+EVSE-1B58AB,Environmental and Earth Sci - Environmental and Earth Science MS,EVSE,Academic,,Yes
+EVSE-429C8A,Environmental and Earth Sci - Earth and Environmental Sciences PhD,EVSE,Academic,,Yes
+EVSE-137FBF,Environmental and Earth Sci - Environmental and Earth Science BS,EVSE,Academic,,Yes
+EVSE-60A0F0,Environ and Earth Sci - Geology BS/BA,EVSE,Academic,,Yes
+EVSE-9A322B,Environmental and Earth Sci - Improvement Report,EVSE,Academic,,Yes
+EVSE-5897BA,Environmental and Earth Sci - UEP,EVSE,Academic,,Yes
+FINA-6D032B,Finance and Real Estate - Finance BBA,FINA,Academic,,Yes
+FINA-B6E638,Finance and Real Estate - Real Estate MSRE,FINA,Academic,,Yes
+FINA-321221,Finance and Real Estate - Real Estate BBA,FINA,Academic,,Yes
+FINA-16BAB0,Finance and Real Estate - Quantitative Finance MS,FINA,Academic,,Yes
+HEALOS-4C03CB,HEALOS - Educational Leadership and Policy Studies PhD,HEALOS,Academic,,Yes
+HEALOS-DAAA06,HEALOS - Instructional and Learning Design Technology MEDCI,HEALOS,Academic,,Yes
+HEALOS-D13A22,"HEALOS - Mind, Brain, and Education MEd (100% Online)",HEALOS,Academic,,Yes
+HEALOS-4A355B,HEALOS - Educational Leadership and Policy Studies  - Interdisciplinary Leadership Minor and Certificate,HEALOS,Academic,,Yes
+HIST-94AFF0,History - Archival Administration Certificate,HIST,Academic,,Yes
+HIST-2E7E23,History - Geography Minor,HIST,Academic,,Yes
+HIST-555AD8,History - History BA,HIST,Academic,,Yes
+HIST-107041,History - History MA,HIST,Academic,,Yes
+HIST-BED851,History - History PhD,HIST,Academic,,Yes
+HIST-D73DA4,History - Military History Minor,HIST,Academic,,Yes
+HIST-BED851,History - History PhD,HIST,Academic,,Yes
+HIST-BD7D7C,History - History of Technology and Science Minor/Certificate,HIST,Academic,,Yes
+IMSE-87ECCB,IMSE - Industrial Engin BSIE,IMSE,Academic,,Yes
+IMSE-638279,IMSE - Eng Management MS (On-campus and Online),IMSE,Academic,,Yes
+IMSE-71A5A4,IMSE - Industrial Engin MS (On-campus and Online),IMSE,Academic,,Yes
+IMSE-889171,IMSE - Industrial Engin PhD,IMSE,Academic,,Yes
+ISOM-C4FC5E,Business Analytics BS,ISOM,Academic,,Yes
+ISOM-74B250,"Business Analytics MS (On-Campus, Ericsson & Online)",ISOM,Academic,,Yes
+ISOM-7FBF56,Information Systems MS,ISOM,Academic,,Yes
+ISOM-0F56C9,Operations and Supply Chain Management BBA,ISOM,Academic,,Yes
+ISOM-810178,Information Systems BBA/BS,ISOM,Academic,,Yes
+KINE-0ECF9B,Kinesiology - Kinesiology BA,KINE,Academic,,Yes
+KINE-DD34D9,Kinesiology - Exercise Science BS,KINE,Academic,,Yes
+KINE-44E8D3,Kinesiology - Public Health BS (On-campus and Online),KINE,Academic,,Yes
+KINE-304021,Kinesiology -Graduate Certificate in Public Health Practice,KINE,Academic,,Yes
+KINE-20241F,Kinesiology -Public Health MPH,KINE,Academic,,Yes
+KINE-1C189F,Kinesiology - Athletic Training MS,KINE,Academic,,Yes
+KINE-366132,Kinesiology - Exercise Science MS,KINE,Academic,,Yes
+KINE-2F67E6,Kinesiology -Kinesiology PhD,KINE,Academic,,Yes
+LA-3037C1,Landscape Architecture MLA,LA,Academic,,Yes
+LA-9B5901,Landscape Architecture - Sustainable Urban Design BS,LA,Academic,,Yes
+LING-408085,Linguistics and TESOL - Linguistics PhD,LING,Academic,,Yes
+LING-D45158,Linguistics and TESOL - Linguistics BA,LING,Academic,,Yes
+LING-89C6EC,Linguistics and TESOL - Linguistics MA,LING,Academic,,Yes
+LING-00F053,Linguistics and TESOL - TESOL Cert (Graduate),LING,Academic,,Yes
+LING-C734EA,Linguistics and TESOL - TESOL Cert (Undergraduate),LING,Academic,,Yes
+LING-79FC9B,Linguistics and TESOL - TESOL MA,LING,Academic,,Yes
+MAE-2C6F31,MAE - Aerospace Eng PhD,MAE,Academic,,Yes
+MAE-3E0B46,MAE - Aerospace Eng MS and MENGR  (On-campus and Online),MAE,Academic,,Yes
+MAE-E85B76,MAE - Electronic Packaging Cert (On-campus and Online),MAE,Academic,,Yes
+MAE-498F96,MAE - Aerospace Eng BSAE,MAE,Academic,,Yes
+MAE-E3AA65,MAE - Mechanical Eng BSME,MAE,Academic,,Yes
+MAE-99BE62,MAE - Mechanical Eng MS and MENGR (On-campus and Online),MAE,Academic,,Yes
+MAE-9835EA,MAE - Mechanical Eng PhD,MAE,Academic,,Yes
+MANA-80B43D,Management - Management BBA (on-campus and FWC),MANA,Academic,,Yes
+MANA-9E27FB,Management - Human Resources Management MS,MANA,Academic,,Yes
+MANA-902B61,Management - Hospitality Management BBA/BS,MANA,Academic,,Yes
+MANA-098EEF,Managing Diversity and Inclusion in Organizations Certificate,MANA,Academic,,Yes
+MARK-9EDA1D,Marketing - Marketing Research MS,MARK,Academic,,Yes
+MARK-87C607,Marketing - Marketing BBA,MARK,Academic,,Yes
+MATH-84BD92,Mathematics - Mathematics BS,MATH,Academic,,Yes
+MATH-F9B993,Mathematics - Mathematics MS,MATH,Academic,,Yes
+MATH-301D0F,Mathematics - Mathematics PhD,MATH,Academic,,Yes
+MODL-65A294,MODL - Modern Languages BA,MODL,Academic,,Yes
+MODL-1253D2,MODL - Critical Languages and Intl Studies BA,MODL,Academic,,Yes
+MODL-9B79BA,MODL - French BA,MODL,Academic,,Yes
+MODL-5930A8,MODL - Modern Languages MA,MODL,Academic,,Yes
+MODL-CFA843,MODL - Spanish for Global Competence BA,MODL,Academic,,Yes
+MODL-B7EF96,MODL - Spanish Translation and Interpretation BA,MODL,Academic,,Yes
+MSE-9F031E,Mat Science - Materials Science and Engin MENGR,MSE,Academic,,Yes
+MSE-E1CDA5,Mat Science - Materials Science and Engin Minor,MSE,Academic,,Yes
+MSE-F7956D,Mat Science - Materials Science and Engin MS,MSE,Academic,,Yes
+MSE-1BAC77,Mat Science - Materials Science and Engin MS Thesis Substitute,MSE,Academic,,Yes
+MSE-70AC68,Mat Science - Materials Science and Engin PhD,MSE,Academic,,Yes
+MSE-C902C4,Mat Science - Nanotechnology Minor,MSE,Academic,,Yes
+MUSI-A8729D,Music - Music BM,MUSI,Academic,,Yes
+MUSI-3FBCB1,Music - Music MM,MUSI,Academic,,Yes
+MUSI-B32459,Music - Music Industry BA,MUSI,Academic,,Yes
+MUSI-82A745,Music - Music Education MM (On-campus and Online),MUSI,Academic,,Yes
+MUSI-4A8264,Music - Music Performance Certificate,MUSI,Academic,,Yes
+MUSI-120BC2,Music - Music Performance MM,MUSI,Academic,,Yes
+PAPL-046268,PAPL - Public Administration MPA (On-campus and Online),PAPL,Academic,,Yes
+PAPL-353BA5,PAPL - Urban and Public Affairs Minor,PAPL,Academic,,Yes
+PAPL-D986EA,PAPL - City and Regional Planning MCRP,PAPL,Academic,,Yes
+PAPL-5BF681,PAPL - Public Administration and Public Policy PhD,PAPL,Academic,,Yes
+PAPL-D02FFD,PAPL - Urban Planning and Public Policy PhD,PAPL,Academic,,Yes
+PAPL-2A1ED7,PAPL - Environmental and Sustainability Studies Minor,PAPL,Academic,,Yes
+PHIL-003CF4,"Philosophy and Humanities - Classics Minor (Greek, Latin, Ancient Studies, Classic Civilization)",PHIL,Academic,,Yes
+PHIL-2669F6,Philosophy and Humanities - Philosophy BA,PHIL,Academic,,Yes
+PHIL-F46E50,Philosophy and Humanities - Medical Humanities and Bioethics Minor,PHIL,Academic,,Yes
+PHYS-B6A039,Physics - Physics and Applied Physics PhD,PHYS,Academic,,Yes
+PHYS-07529E,Physics - Physics BS,PHYS,Academic,,Yes
+PHYS-BC7BCE,Physics - Physics MA/MS,PHYS,Academic,,Yes
+POLS-DE4FE5,Political Science - Political Science BA,POLS,Academic,,Yes
+POLS-470B4D,Political Science - Political Science MA,POLS,Academic,,Yes
+PSYC-43D170,Psychology - General Experimental Psychology PhD,PSYC,Academic,,Yes
+PSYC-479DF6,Psychology - Psychology BA/BS,PSYC,Academic,,Yes
+PSYC-48EC6E,Psychology - Industrial and Organizational Psychology MS,PSYC,Academic,,Yes
+SOCI-9AB3BC,Sociology and Anthropology - Sociology BA,SOCI,Academic,,Yes
+SOCI-F4561E,Sociology and Anthropology - Applied Sociology BS,SOCI,Academic,,Yes
+SOCI-78F4FB,Sociology and Anthropology - Anthropology BA,SOCI,Academic,,Yes
+SOCI-74A948,Sociology and Anthropology - Sociology MA,SOCI,Academic,,Yes
+SOCW-86F87D,Social Work BSW (On-campus and FWC),SOCW,Academic,,Yes
+SOCW-459007,Social Work Diversity Certificate,SOCW,Academic,,Yes
+SOCW-E5F9FD,"Social Work MSW (On-campus, FWC, and Online)",SOCW,Academic,,Yes
+SOCW-CDDF6A,Social Work PhD,SOCW,Academic,,Yes
+SOCW-CC5A11,Social Work Social Justice and Social Welfare Minor,SOCW,Academic,,Yes
+SOCW-26AD5B,Substance Use and Treatment BS,SOCW,Academic,,Yes
+TAP-B60E30,TAP - Curriculum and Instruction MEd and Education MEdT (On-campus and Online),TAP,Academic,,Yes
+TAP-286361,TAP - Education BA/BS,TAP,Academic,,Yes
+TAP-7B9F93,TAP - Special Education MEd,TAP,Academic,,Yes
+TAP-EB9E54,"TAP - Educational Leadership and Policy Studies MEd (On-campus: Higher Ed, and Online: Principal Certification)",TAP,Academic,,Yes
+THEA-F5C2D0,Theatre Arts - Theatre Arts BA/BFA,THEA,Academic,,Yes

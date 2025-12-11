@@ -66,14 +66,13 @@ UTA_CSS = """
     footer {visibility: hidden;}
     header {visibility: hidden;}
     
-    /* PREVENT SIDEBAR COLLAPSE */
+    /* Style the sidebar toggle button */
     [data-testid="collapsedControl"] {
-        display: none !important;
+        color: var(--uta-dark-blue) !important;
     }
     
-    section[data-testid="stSidebar"] {
-        min-width: 280px !important;
-        width: 280px !important;
+    [data-testid="collapsedControl"] svg {
+        stroke: var(--uta-dark-blue) !important;
     }
     
     /* Remove top padding */

@@ -2670,9 +2670,17 @@ def render_analyze_page(api_key, access_token, ms_drive_id, ms_item_id, excel_co
             with st.expander("📋 Copy to clipboard"):
                 # Convert markdown to plain text
                 plain_text = results["analysis"]
+                # Replace full header patterns first (before stripping markdown)
+                plain_text = plain_text.replace("### ✓ STRENGTHS", "STRENGTHS")
+                plain_text = plain_text.replace("### ✎ REVISIONS REQUESTED", "REVISIONS REQUESTED")
+                plain_text = plain_text.replace("## ✓ STRENGTHS", "STRENGTHS")
+                plain_text = plain_text.replace("## ✎ REVISIONS REQUESTED", "REVISIONS REQUESTED")
+                plain_text = plain_text.replace("✓ STRENGTHS", "STRENGTHS")
+                plain_text = plain_text.replace("✎ REVISIONS REQUESTED", "REVISIONS REQUESTED")
+                # Remove remaining markdown
                 plain_text = plain_text.replace("### ", "").replace("## ", "").replace("# ", "")
                 plain_text = plain_text.replace("**", "").replace("*", "")
-                plain_text = plain_text.replace("✓", "STRENGTHS:").replace("✎", "REVISIONS REQUESTED:")
+                plain_text = plain_text.replace("✓", "").replace("✎", "")
                 st.caption("Click the copy icon in the top-right corner of the box below:")
                 st.code(plain_text, language=None)
         else:

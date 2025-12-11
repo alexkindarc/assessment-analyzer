@@ -111,32 +111,46 @@ UTA_CSS = """
         color: var(--text-primary) !important;
     }
     
-    /* Sidebar navigation buttons */
-    section[data-testid="stSidebar"] .nav-button button {
-        background-color: transparent !important;
-        border: none !important;
-        color: var(--text-primary) !important;
-        text-align: left !important;
-        padding: 0.75rem 1rem !important;
+    /* Sidebar buttons - ensure readable text */
+    section[data-testid="stSidebar"] .stButton > button {
+        background-color: white !important;
+        border: 1px solid #e1e5eb !important;
+        color: #1a2b3c !important;
         border-radius: 8px !important;
         font-weight: 500 !important;
-        width: 100% !important;
-        transition: all 0.2s ease !important;
+        text-align: left !important;
+        padding: 0.75rem 1rem !important;
     }
     
-    section[data-testid="stSidebar"] .nav-button button:hover {
-        background-color: rgba(0, 100, 177, 0.1) !important;
-        color: var(--uta-blue) !important;
+    section[data-testid="stSidebar"] .stButton > button:hover {
+        background-color: #f0f4f8 !important;
+        border-color: #0064b1 !important;
+        color: #0064b1 !important;
     }
     
-    section[data-testid="stSidebar"] .nav-button-active button {
-        background-color: var(--uta-blue) !important;
+    /* Primary buttons in sidebar (active nav) */
+    section[data-testid="stSidebar"] .stButton > button[kind="primary"],
+    section[data-testid="stSidebar"] .stButton > button[data-testid="baseButton-primary"] {
+        background-color: #0064b1 !important;
+        border-color: #0064b1 !important;
         color: white !important;
     }
     
-    section[data-testid="stSidebar"] .nav-button-active button:hover {
-        background-color: var(--uta-dark-blue) !important;
+    /* Disabled primary buttons (current page indicator) */
+    section[data-testid="stSidebar"] .stButton > button[kind="primary"]:disabled,
+    section[data-testid="stSidebar"] .stButton > button[data-testid="baseButton-primary"]:disabled {
+        background-color: #0064b1 !important;
+        border-color: #0064b1 !important;
         color: white !important;
+        opacity: 1 !important;
+        cursor: default !important;
+    }
+    
+    /* Fix text inside all sidebar buttons */
+    section[data-testid="stSidebar"] .stButton > button p,
+    section[data-testid="stSidebar"] .stButton > button span,
+    section[data-testid="stSidebar"] .stButton > button div {
+        color: inherit !important;
     }
     
     /* Sidebar dividers */
@@ -2278,28 +2292,28 @@ def main():
         # Navigation section
         st.markdown('<p style="color: #8896a6; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Pages</p>', unsafe_allow_html=True)
         
-        # Navigation buttons with active state styling
-        nav_class = "nav-button-active" if st.session_state["current_page"] == "analyze" else "nav-button"
-        st.markdown(f'<div class="{nav_class}">', unsafe_allow_html=True)
-        if st.button("Analyze Report", key="nav_analyze", use_container_width=True):
-            st.session_state["current_page"] = "analyze"
-            st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
+        # Navigation buttons - use type="primary" for active page
+        if st.session_state["current_page"] == "analyze":
+            st.button("● Analyze Report", key="nav_analyze", use_container_width=True, type="primary", disabled=True)
+        else:
+            if st.button("Analyze Report", key="nav_analyze", use_container_width=True):
+                st.session_state["current_page"] = "analyze"
+                st.rerun()
         
-        nav_class = "nav-button-active" if st.session_state["current_page"] == "batch" else "nav-button"
-        st.markdown(f'<div class="{nav_class}">', unsafe_allow_html=True)
-        if st.button("Batch Import", key="nav_batch", use_container_width=True):
-            st.session_state["current_page"] = "batch"
-            st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
+        if st.session_state["current_page"] == "batch":
+            st.button("● Batch Import", key="nav_batch", use_container_width=True, type="primary", disabled=True)
+        else:
+            if st.button("Batch Import", key="nav_batch", use_container_width=True):
+                st.session_state["current_page"] = "batch"
+                st.rerun()
         
         if st.session_state["admin_mode"]:
-            nav_class = "nav-button-active" if st.session_state["current_page"] == "config" else "nav-button"
-            st.markdown(f'<div class="{nav_class}">', unsafe_allow_html=True)
-            if st.button("Configuration", key="nav_config", use_container_width=True):
-                st.session_state["current_page"] = "config"
-                st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
+            if st.session_state["current_page"] == "config":
+                st.button("● Configuration", key="nav_config", use_container_width=True, type="primary", disabled=True)
+            else:
+                if st.button("Configuration", key="nav_config", use_container_width=True):
+                    st.session_state["current_page"] = "config"
+                    st.rerun()
         
         st.divider()
         
@@ -2372,32 +2386,6 @@ def main():
             st.rerun()
     
     # Main content area based on current page
-    
-    # Prominent Menu button to restore sidebar if hidden
-    st.markdown("""
-    <style>
-        /* Style the menu button */
-        [data-testid="stButton"] button:has([data-testid="stMarkdownContainer"]) {
-            background-color: var(--uta-dark-blue) !important;
-            color: white !important;
-        }
-        div[data-testid="column"]:first-child button {
-            background-color: #003865 !important;
-            color: white !important;
-            border: none !important;
-            font-weight: 500 !important;
-        }
-        div[data-testid="column"]:first-child button:hover {
-            background-color: #0064b1 !important;
-        }
-    </style>
-    """, unsafe_allow_html=True)
-    
-    menu_col1, menu_col2 = st.columns([1, 11])
-    with menu_col1:
-        if st.button("☰ Menu", key="show_menu_btn"):
-            st.rerun()
-    
     if st.session_state["current_page"] == "analyze":
         render_analyze_page(api_key, access_token, ms_drive_id, ms_item_id, excel_connected, registry)
     elif st.session_state["current_page"] == "batch":

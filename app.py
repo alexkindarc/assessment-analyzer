@@ -86,7 +86,12 @@ UTA_CSS = """
     }
     
     section[data-testid="stSidebar"] > div {
-        padding-top: 1rem;
+        padding-top: 0.5rem;
+    }
+    
+    /* Reduce default spacing around elements in sidebar */
+    section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] > div {
+        gap: 0.25rem;
     }
     
     /* Sidebar text colors - dark on light */
@@ -467,10 +472,15 @@ UTA_CSS = """
     
     /* Logo area with accent bar */
     .logo-area {
-        padding: 1rem 0.5rem 1.5rem 0.5rem;
+        padding: 0 0.5rem 1rem 0.5rem;
         border-bottom: 1px solid var(--border-color);
         margin-bottom: 1rem;
         position: relative;
+    }
+    
+    /* Reduce spacing around sidebar logo image */
+    section[data-testid="stSidebar"] [data-testid="stImage"] {
+        margin-bottom: 0 !important;
     }
     
     .logo-area::after {
@@ -882,13 +892,19 @@ def check_password():
         # Inject branding for login page
         inject_uta_branding()
         
-        # Clean login page with logo
-        col_logo1, col_logo2, col_logo3 = st.columns([1, 1, 1])
-        with col_logo2:
-            try:
-                st.image("logo.png", width=200)
-            except:
-                pass  # No logo found, skip
+        # Clean login page with centered logo
+        try:
+            # Use HTML to properly center the logo
+            import base64
+            with open("logo.png", "rb") as f:
+                logo_data = base64.b64encode(f.read()).decode()
+            st.markdown(f'''
+            <div style="text-align: center; padding-top: 2rem;">
+                <img src="data:image/png;base64,{logo_data}" style="width: 200px;">
+            </div>
+            ''', unsafe_allow_html=True)
+        except:
+            pass  # No logo found, skip
         
         st.markdown("""
         <div style="text-align: center; padding: 1rem 0 2rem 0;">
@@ -2414,14 +2430,21 @@ def main():
     
     # Sidebar
     with st.sidebar:
-        # Logo and title area
+        # Logo and title area - compact spacing
         try:
-            st.image("logo.png", width=100)
+            import base64
+            with open("logo.png", "rb") as f:
+                logo_data = base64.b64encode(f.read()).decode()
+            st.markdown(f'''
+            <div style="margin-bottom: 0.5rem;">
+                <img src="data:image/png;base64,{logo_data}" style="width: 100px;">
+            </div>
+            ''', unsafe_allow_html=True)
         except:
             pass  # No logo found, skip
         
         st.markdown("""
-        <div class="logo-area">
+        <div class="logo-area" style="margin-top: 0; padding-top: 0;">
             <div class="logo-text">Assessment<br>Analyzer</div>
         </div>
         """, unsafe_allow_html=True)

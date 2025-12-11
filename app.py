@@ -98,23 +98,36 @@ UTA_CSS = """
         border: none;
     }
     
-    /* Secondary buttons */
-    .stButton > button[kind="secondary"] {
-        border: 2px solid #0064b1;
-        color: #0064b1;
-    }
-    
-    .stButton > button[kind="secondary"]:hover {
-        background-color: #f5f7fa;
-    }
-    
-    /* Sidebar styling */
+    /* Sidebar styling - FIXED FOR READABILITY */
     section[data-testid="stSidebar"] {
         background-color: #003865;
     }
     
+    section[data-testid="stSidebar"] * {
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] .stTextInput label,
+    section[data-testid="stSidebar"] .stSelectbox label,
+    section[data-testid="stSidebar"] .stTextArea label {
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] .stTextInput input,
+    section[data-testid="stSidebar"] .stSelectbox select,
+    section[data-testid="stSidebar"] .stTextArea textarea {
+        background-color: white !important;
+        color: #003865 !important;
+    }
+    
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] span,
+    section[data-testid="stSidebar"] label {
+        color: white !important;
+    }
+    
     section[data-testid="stSidebar"] .stMarkdown {
-        color: white;
+        color: white !important;
     }
     
     section[data-testid="stSidebar"] h1,
@@ -123,12 +136,28 @@ UTA_CSS = """
         color: white !important;
     }
     
-    section[data-testid="stSidebar"] .stCaption {
-        color: rgba(255,255,255,0.7) !important;
+    section[data-testid="stSidebar"] hr {
+        border-color: rgba(255,255,255,0.3) !important;
     }
     
-    section[data-testid="stSidebar"] hr {
-        border-color: rgba(255,255,255,0.2);
+    /* Expander in sidebar */
+    section[data-testid="stSidebar"] .streamlit-expanderHeader {
+        background-color: rgba(255,255,255,0.1) !important;
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] .streamlit-expanderContent {
+        background-color: rgba(255,255,255,0.05) !important;
+    }
+    
+    /* Success/Info/Warning boxes in sidebar */
+    section[data-testid="stSidebar"] .stAlert {
+        background-color: rgba(255,255,255,0.1) !important;
+    }
+    
+    /* Main content area - ensure readability */
+    .main .block-container {
+        color: #003865;
     }
     
     /* Success messages with orange accent */
@@ -150,6 +179,7 @@ UTA_CSS = """
         border-radius: 4px 4px 0 0;
         padding: 10px 20px;
         background-color: #f5f7fa;
+        color: #003865 !important;
     }
     
     .stTabs [aria-selected="true"] {
@@ -157,20 +187,15 @@ UTA_CSS = """
         color: white !important;
     }
     
-    /* Expander styling */
-    .streamlit-expanderHeader {
+    /* Expander styling in main content */
+    .main .streamlit-expanderHeader {
         background-color: #f5f7fa;
         border-radius: 4px;
+        color: #003865 !important;
     }
     
-    .streamlit-expanderHeader:hover {
+    .main .streamlit-expanderHeader:hover {
         background-color: #e8ecf0;
-    }
-    
-    /* Divider with UTA blue */
-    hr {
-        border-top: 1px solid #0064b1;
-        opacity: 0.2;
     }
     
     /* Footer styling */
@@ -187,26 +212,10 @@ UTA_CSS = """
         color: #F58025;
     }
     
-    /* Login page styling */
-    .login-container {
-        max-width: 400px;
-        margin: 2rem auto;
-        padding: 2rem;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        border-top: 4px solid #F58025;
-    }
-    
     /* Data editor styling */
     .stDataFrame {
         border: 1px solid #e0e0e0;
         border-radius: 4px;
-    }
-    
-    /* Metric styling */
-    [data-testid="stMetricValue"] {
-        color: #003865;
     }
     
     /* File uploader */
@@ -219,6 +228,22 @@ UTA_CSS = """
     [data-testid="stFileUploader"]:hover {
         border-color: #F58025;
         background-color: #fef8f3;
+    }
+    
+    /* Fix any blue text on blue issues */
+    .stMarkdown a {
+        color: #0064b1 !important;
+    }
+    
+    /* Ensure form labels are dark on light background */
+    .main label {
+        color: #003865 !important;
+    }
+    
+    .main .stTextInput label,
+    .main .stSelectbox label,
+    .main .stTextArea label {
+        color: #003865 !important;
     }
 </style>
 """
@@ -353,167 +378,57 @@ DEFAULT_RESULTS_ANALYSIS_PROMPT = """You are an expert in higher education asses
 
 ## Your Task: Analyze this Results Report
 
-Review the assessment report and provide constructive feedback organized as follows:
+Review the assessment report and run ALL of the following checks internally. Do NOT output each check separately. Instead, synthesize your findings into a concise, actionable response.
 
-### 1. FIELD COMPLETENESS CHECK
-Verify that ALL required fields are filled in the report. The only optional field is "Outcome Rationale."
+### INTERNAL CHECKS TO RUN (do not output these sections):
 
-**Required fields to check:**
-- General Information: Unit name, academic year, unit type, college/division
-- For each outcome: Outcome text, Related Student Competency (academic) or Core Function (administrative), Assessment Method, Criteria for Success, Results, Achievement Level, Action Steps/Proposed Improvements
+1. **Field Completeness** - All required fields filled (Outcome Rationale is optional)
 
-**Flag any missing or empty fields.** Format as:
-- Field Completeness: [Complete / FLAGGED - list missing fields]
+2. **Competencies/Functions** - Must be coherent statements (not single words), and each outcome's Related Competency/Function must match one listed in General Information
 
-### 2. STUDENT COMPETENCIES / CORE FUNCTIONS VERIFICATION
-Verify the quality and consistency of competencies (academic) or core functions (administrative):
+3. **Bloom's Taxonomy** - Action verbs appropriate for program level:
+   - UG lower: Levels 1-3 OK
+   - UG upper/capstone: Levels 3-5 expected
+   - Graduate: Levels 4-6 expected (1-3 too low)
+   - Doctoral: Levels 5-6 expected
+   - Flag vague verbs: "understand," "know," "learn," "appreciate"
 
-**A. Coherence Check:**
-- Student Competencies and Core Functions must be coherent, complete statements
-- They should NOT be single words or sentence fragments
-- Example of FLAGGED: "Communication" or "Critical thinking"
-- Example of CORRECT: "Students will demonstrate effective written and oral communication skills appropriate to the discipline"
+4. **Results-Criteria Alignment** - Results must align with criteria for success IN SUBSTANCE (not verbatim). If criteria says "75% score 80%+", results should report a percentage against that threshold. Vague results like "most students did well" are insufficient.
 
-**B. Cross-Reference Check:**
-- The "Related Student Competency" or "Related Core Function" field for each outcome must reference a competency/function that is actually listed in the General Information section
-- Flag if an outcome references a competency/function that does not appear in General Information
-- Flag if the reference is vague or doesn't clearly match
+5. **Quantitative Data** - Methodology must produce at least one quantitative result
 
-Format your verification as:
-- Competencies/Functions Listed in General Info: [list them]
-- Coherence: [Coherent statements / FLAGGED - single words or fragments found]
-- Cross-Reference Verification:
-  - Outcome [name]: References "[competency/function]" → [Valid match / FLAGGED - not found in General Info]
+6. **Sample Size** - When percentages reported, sample size (n=) must be provided
 
-### 3. STRENGTHS
-Identify 2-4 specific things the report does well. Be genuine and specific.
+7. **Achievement Level Logic**:
+   - Fully Achieved: Results meet ALL criteria
+   - Partially Achieved: ONLY valid with multiple criteria where some met, some not
+   - Not Achieved: Results don't meet criteria
+   - Inconclusive: Must be explained in report
 
-### 4. OPPORTUNITIES FOR STRENGTHENING
-For each area that could be improved:
-- Reference the relevant rubric criterion and explain WHY it matters
-- Describe specifically what you observed in the report
-- Offer a concrete suggestion for improvement
-- Use supportive, collegial language
+8. **Action Steps** - Must be specific (who, what, when), not vague or copy-pasted across outcomes
 
-Pay special attention to:
-- Whether results are reported in the EXACT format of the criteria for success
-- Whether improvement actions are specific to the findings (not generic/templated)
-- Whether different outcomes have appropriately differentiated responses
-
-### 5. OUTCOME FORMULATION CHECK
-For each outcome, verify it uses appropriate action verbs according to Bloom's Taxonomy (Revised):
-
-**Bloom's Taxonomy Levels (lowest to highest):**
-1. Remember: define, list, recall, identify, name, recognize
-2. Understand: explain, describe, summarize, interpret, classify, compare
-3. Apply: apply, demonstrate, use, implement, solve, execute
-4. Analyze: analyze, differentiate, examine, compare, contrast, deconstruct
-5. Evaluate: evaluate, assess, critique, judge, justify, defend
-6. Create: create, design, develop, construct, produce, formulate
-
-**Program Level Expectations:**
-- **Undergraduate (lower division)**: Levels 1-3 are appropriate; Levels 4-6 for capstone/advanced courses
-- **Undergraduate (upper division/capstone)**: Levels 3-5 expected; Level 6 encouraged
-- **Graduate (Master's)**: Levels 4-6 expected; Levels 1-3 are too low
-- **Doctoral**: Levels 5-6 expected; emphasis on Create, Evaluate, and original contribution
-
-**Flag if:**
-- Outcome uses vague, non-measurable verbs (e.g., "understand," "know," "learn," "be aware of," "appreciate")
-- Outcome verb level is inappropriate for program level (e.g., Master's outcome using "identify" or "list")
-- Outcome is not measurable or observable
-
-Format your verification as:
-- Outcome: [name]
-- Action Verb Used: [verb]
-- Bloom's Level: [level]
-- Program Level: [UG lower/UG upper/Graduate/Doctoral]
-- Appropriateness: [Appropriate / FLAGGED - explain why verb is inappropriate for this level]
-
-### 6. RESULTS-CRITERIA ALIGNMENT CHECK
-For each outcome, verify that results match the benchmark format:
-- Benchmark: [quote the criterion for success]
-- Results as Reported: [quote how results were stated]
-- Alignment: [Aligned / Needs Revision - explain if misaligned]
-
-### 7. METHODOLOGY & DATA VERIFICATION
-For each outcome, verify the following:
-
-**A. Quantitative Results Requirement:**
-- The methodology must produce at least one quantitative result (a number, percentage, score, or measurable value)
-- Purely qualitative or descriptive results without any quantitative data are insufficient
-- Flag if results are entirely narrative/qualitative with no quantitative measure
-
-**B. Sample Size Requirement:**
-- Whenever percentages are reported, the sample or population size (n=) MUST be provided
-- Without sample size, percentages are meaningless (e.g., "80% achieved" could mean 4 out of 5 or 800 out of 1000)
-- Flag if percentages are reported without corresponding sample/population size
-
-Format your verification as:
-- Outcome: [name]
-- Quantitative Data Present: [Yes / FLAGGED - no quantitative results found]
-- Sample Size Reported: [Yes (n=X) / FLAGGED - percentages given without sample size / N/A - no percentages reported]
-
-### 8. ACHIEVEMENT LEVEL VERIFICATION
-For each outcome, verify that the stated achievement level is logically consistent with the reported results and benchmark. Check for:
-
-- **Fully Achieved**: Results must clearly meet or exceed ALL stated criteria. Flag if results do not meet the benchmark but outcome is marked Fully Achieved.
-- **Partially Achieved**: This status is ONLY valid when multiple criteria for success exist and some are met while others are not. Flag if Partially Achieved is claimed but only one criterion for success was given (this is logically impossible).
-- **Not Achieved**: Results do not meet the benchmark. Flag if results clearly meet the benchmark but outcome is marked Not Achieved.
-- **Inconclusive**: Must be explained in the text of results (e.g., insufficient data, measurement issues, unclear results). Flag if Inconclusive is claimed but no coherent explanation is provided in the report.
-
-Format your verification as:
-- Outcome: [name]
-- Claimed Achievement: [what the report states]
-- Verification: [Correct / FLAGGED - explain the inconsistency]
-
-### 9. ACTION STEPS VERIFICATION
-Verify that the action steps (actions to facilitate achievement) contain specific, concrete actions the unit will take:
-
-**Action steps MUST include:**
-- Specific activities or interventions (not vague intentions)
-- What will be done (curriculum changes, pedagogical approaches, resources, support)
-- Who is responsible (instructor, department, program coordinator)
-- When it will happen (timeline or semester)
-
-**Flag if action steps:**
-- Are vague or generic (e.g., "instructors will emphasize this more," "we will try harder")
-- Lack specificity about what exactly will change
-- Do not identify responsible parties
-- Are copy-pasted across multiple outcomes without differentiation
-- Are empty or state "no action needed" for outcomes not achieved
-
-Format your verification as:
-- Outcome: [name]
-- Action Steps Quality: [Specific and actionable / FLAGGED - explain what's missing]
-
-### 10. PROPOSED IMPROVEMENTS VERIFICATION
-For outcomes that were not fully achieved, verify that proposed improvements contain sufficient detail:
-
-**Proposed improvements MUST include:**
-- Clear identification of what will change (not just "improve" or "enhance")
-- Connection to the specific finding (what gap or issue is being addressed)
-- General approach or strategy (doesn't need to be a full implementation plan, but must be more than a vague intention)
-- Responsible party or parties
-- General timeline (semester, academic year, or specific date)
-
-**Flag if proposed improvements:**
-- Are too vague (e.g., "We will work to improve this area," "Faculty will focus more on this topic")
-- Do not connect to the specific finding or gap identified
-- Are identical/templated across multiple outcomes with different issues
-- Lack any indication of who will do what
-- Are missing entirely for outcomes not achieved
-
-Format your verification as:
-- Outcome: [name]
-- Achievement: [Fully Achieved / Partially Achieved / Not Achieved / Inconclusive]
-- Proposed Improvement Detail: [Sufficient / FLAGGED - explain what's missing or too vague]
-
-### 11. SUGGESTED REVISIONS
-If revisions are needed, provide specific, actionable guidance in a format suitable for an email to the unit. Maintain a collegial, supportive tone.
+9. **Proposed Improvements** - For outcomes not achieved, must have sufficient detail (what will change, who responsible, timeline), not just "we will try harder"
 
 {stagnation_context}
 
 {custom_rubric}
+
+## YOUR OUTPUT FORMAT:
+
+Provide a concise response with TWO sections only:
+
+### ✓ STRENGTHS
+2-3 bullet points of what the report does well. Be genuine and specific.
+
+### ✎ REVISIONS REQUESTED
+Bullet-pointed list of specific revisions needed. Each bullet should:
+- State the issue clearly and briefly
+- Be actionable (they should know exactly what to fix)
+- Use collegial, supportive language
+
+If no revisions needed, say "No revisions needed - report meets all criteria."
+
+Keep your total response under 500 words. Be direct and actionable.
 
 ## Report to Analyze:
 
@@ -528,23 +443,34 @@ DEFAULT_IMPROVEMENT_ANALYSIS_PROMPT = """You are an expert in higher education a
 
 ## Your Task: Analyze this Improvement Report
 
-This report documents actions the unit has taken based on previous assessment findings. Focus on:
+This report documents actions the unit has taken based on previous assessment findings. Run checks internally and provide a concise response.
 
-### 1. CLARITY OF ACTIONS
-- Are the improvement actions clearly described?
-- Can a reader understand specifically what was done?
-- Is there enough detail to demonstrate genuine effort?
+### INTERNAL CHECKS TO RUN (do not output these sections):
 
-### 2. CONNECTION TO PREVIOUS FINDINGS
+1. **Clarity of Actions** - Are improvement actions clearly described with enough detail to demonstrate genuine effort?
+
+2. **Connection to Previous Findings** - Does the report reference what was originally found and how actions address it? (This is good practice but not strictly required - note gently if missing)
+
+3. **Specificity** - Do actions describe what specifically was done, not just vague statements like "we improved" or "faculty focused more on this"?
+
 {previous_context}
 
-Note: Connection to original assessment findings is good practice but not always possible. If the connection is unclear, mention it gently as an opportunity for future reports, not as a major concern.
+## YOUR OUTPUT FORMAT:
 
-### 3. STRENGTHS
-What does this improvement report do well? Acknowledge genuine efforts.
+Provide a concise response with TWO sections only:
 
-### 4. SUGGESTIONS FOR STRENGTHENING
-If applicable, offer constructive suggestions for making the improvement documentation clearer or more complete. Remember the supportive, collegial tone.
+### ✓ STRENGTHS
+2-3 bullet points of what the improvement report does well. Acknowledge genuine efforts.
+
+### ✎ REVISIONS REQUESTED
+Bullet-pointed list of specific revisions needed. Each bullet should:
+- State the issue clearly and briefly
+- Be actionable (they should know exactly what to fix)
+- Use collegial, supportive language
+
+If no revisions needed, say "No revisions needed - report adequately documents improvement efforts."
+
+Keep your total response under 400 words. Be direct and supportive.
 
 ## Report to Analyze:
 
@@ -559,111 +485,51 @@ DEFAULT_PLAN_ANALYSIS_PROMPT = """You are an expert in higher education assessme
 
 ## Your Task: Analyze this Next Cycle Plan
 
-This is a forward-looking plan (no results yet). Analyze everything EXCEPT results:
+This is a forward-looking plan (no results yet). Run ALL checks internally and provide a concise, actionable response.
 
-### 1. FIELD COMPLETENESS CHECK
-Verify that ALL required fields are filled in the plan. The only optional field is "Outcome Rationale."
+### INTERNAL CHECKS TO RUN (do not output these sections):
 
-**Required fields to check:**
-- General Information: Unit name, academic year, unit type, college/division
-- For each outcome: Outcome text, Related Student Competency (academic) or Core Function (administrative), Planned Assessment Method, Planned Criteria for Success, Action Steps
+1. **Field Completeness** - All required fields filled (Outcome Rationale is optional)
 
-**Flag any missing or empty fields.** Format as:
-- Field Completeness: [Complete / FLAGGED - list missing fields]
+2. **Competencies/Functions** - Must be coherent statements (not single words), and each outcome's Related Competency/Function must match one listed in General Information
 
-### 2. STUDENT COMPETENCIES / CORE FUNCTIONS VERIFICATION
-Verify the quality and consistency of competencies (academic) or core functions (administrative):
+3. **Bloom's Taxonomy** - Action verbs appropriate for program level:
+   - UG lower: Levels 1-3 OK
+   - UG upper/capstone: Levels 3-5 expected
+   - Graduate: Levels 4-6 expected (1-3 too low)
+   - Doctoral: Levels 5-6 expected
+   - Flag vague verbs: "understand," "know," "learn," "appreciate"
 
-**A. Coherence Check:**
-- Student Competencies and Core Functions must be coherent, complete statements
-- They should NOT be single words or sentence fragments
-- Example of FLAGGED: "Communication" or "Critical thinking"
-- Example of CORRECT: "Students will demonstrate effective written and oral communication skills appropriate to the discipline"
+4. **Outcome Labels**:
+   - Academic programs: "Student Learning Outcomes"
+   - Administrative units: "Outcomes" (NOT "learning outcomes")
 
-**B. Cross-Reference Check:**
-- The "Related Student Competency" or "Related Core Function" field for each outcome must reference a competency/function that is actually listed in the General Information section
-- Flag if an outcome references a competency/function that does not appear in General Information
-- Flag if the reference is vague or doesn't clearly match
+5. **Methodology** - Will it produce quantitative results? Is it appropriate for the outcome?
 
-Format your verification as:
-- Competencies/Functions Listed in General Info: [list them]
-- Coherence: [Coherent statements / FLAGGED - single words or fragments found]
-- Cross-Reference Verification:
-  - Outcome [name]: References "[competency/function]" → [Valid match / FLAGGED - not found in General Info]
+6. **Criteria for Success** - Clear, specific, appropriately ambitious
 
-### 3. OUTCOME QUALITY & BLOOM'S TAXONOMY
-For each outcome, verify it uses appropriate action verbs according to Bloom's Taxonomy (Revised):
+7. **Action Steps** - Specific actions to facilitate achievement (who, what, when), not vague or identical across outcomes
 
-**Bloom's Taxonomy Levels (lowest to highest):**
-1. Remember: define, list, recall, identify, name, recognize
-2. Understand: explain, describe, summarize, interpret, classify, compare
-3. Apply: apply, demonstrate, use, implement, solve, execute
-4. Analyze: analyze, differentiate, examine, compare, contrast, deconstruct
-5. Evaluate: evaluate, assess, critique, judge, justify, defend
-6. Create: create, design, develop, construct, produce, formulate
-
-**Program Level Expectations:**
-- **Undergraduate (lower division)**: Levels 1-3 are appropriate; Levels 4-6 for capstone/advanced courses
-- **Undergraduate (upper division/capstone)**: Levels 3-5 expected; Level 6 encouraged
-- **Graduate (Master's)**: Levels 4-6 expected; Levels 1-3 are too low
-- **Doctoral**: Levels 5-6 expected; emphasis on Create, Evaluate, and original contribution
-
-**Also verify:**
-- Outcomes are specific and measurable
-- Outcomes use appropriate action verbs (not vague verbs like "understand," "know," "learn," "appreciate")
-- Outcomes are aligned with program goals
-- For academic programs: Should be labeled "Student Learning Outcomes"
-- For administrative units: Should be labeled "Outcomes" (not "learning outcomes")
-
-Format your verification as:
-- Outcome: [name]
-- Action Verb Used: [verb]
-- Bloom's Level: [level]
-- Program Level: [UG lower/UG upper/Graduate/Doctoral]
-- Appropriateness: [Appropriate / FLAGGED - explain why verb is inappropriate for this level]
-
-### 4. METHODOLOGY APPROPRIATENESS  
-- Are assessment methods appropriate for the outcomes?
-- Are they direct measures where possible?
-- Is the alignment between outcome and method clear?
-- Will the methodology produce quantitative results?
-
-### 5. BENCHMARK/CRITERIA CLARITY
-- Are success criteria clearly defined?
-- Are they appropriately ambitious yet achievable?
-- Is the rationale reasonable?
-- Are criteria specific enough to evaluate (not vague)?
-
-### 6. ACTION STEPS VERIFICATION
-Verify that the action steps contain specific, concrete actions the unit will take to facilitate student achievement:
-
-**Action steps MUST include:**
-- Specific activities or interventions (not vague intentions)
-- What will be done (curriculum content, pedagogical approaches, resources, support)
-- Who is responsible (instructor, department, program coordinator)
-- When it will happen (timeline or semester)
-
-**Flag if action steps:**
-- Are vague or generic (e.g., "instructors will cover this material")
-- Lack specificity about what exactly will be done
-- Do not identify responsible parties
-- Are identical across multiple outcomes without differentiation
-
-Format your verification as:
-- Outcome: [name]
-- Action Steps Quality: [Specific and actionable / FLAGGED - explain what's missing]
-
-### 7. ALIGNMENT
-- Strategic plan theme mapping (if applicable)
-- Related competencies or core functions
-
-### 8. STRENGTHS
-What does this plan do well?
-
-### 9. SUGGESTIONS FOR STRENGTHENING
-Constructive suggestions for improving the plan before implementation.
+8. **Alignment** - Strategic plan theme and competency/function alignment
 
 {custom_rubric}
+
+## YOUR OUTPUT FORMAT:
+
+Provide a concise response with TWO sections only:
+
+### ✓ STRENGTHS
+2-3 bullet points of what the plan does well. Be genuine and specific.
+
+### ✎ REVISIONS REQUESTED
+Bullet-pointed list of specific revisions needed. Each bullet should:
+- State the issue clearly and briefly
+- Be actionable (they should know exactly what to fix)
+- Use collegial, supportive language
+
+If no revisions needed, say "No revisions needed - plan meets all criteria."
+
+Keep your total response under 500 words. Be direct and actionable.
 
 ## Plan to Analyze:
 
@@ -685,6 +551,10 @@ def init_session_state():
         "improvement_prompt": DEFAULT_IMPROVEMENT_ANALYSIS_PROMPT,
         "plan_prompt": DEFAULT_PLAN_ANALYSIS_PROMPT,
         "custom_rubric_text": "",
+        "good_outcome_example": "",
+        "good_criteria_example": "",
+        "good_improvement_example": "",
+        "good_action_example": "",
         "results": None,
         "extracted_metadata": None,
         "filename": None,
@@ -1409,6 +1279,28 @@ When analyzing this improvement report, consider whether the actions taken align
 {st.session_state['custom_rubric_text']}
 """
     
+    # Build good examples section
+    good_examples = ""
+    examples_list = []
+    
+    if st.session_state.get("good_outcome_example"):
+        examples_list.append(f"**Good Outcome Statement:**\n{st.session_state['good_outcome_example']}")
+    
+    if st.session_state.get("good_criteria_example"):
+        examples_list.append(f"**Good Criteria for Success:**\n{st.session_state['good_criteria_example']}")
+    
+    if st.session_state.get("good_improvement_example"):
+        examples_list.append(f"**Good Proposed Improvement:**\n{st.session_state['good_improvement_example']}")
+    
+    if st.session_state.get("good_action_example"):
+        examples_list.append(f"**Good Action Steps:**\n{st.session_state['good_action_example']}")
+    
+    if examples_list:
+        good_examples = "\n\n## EXAMPLES OF QUALITY WORK\nUse these as reference for what good looks like. Recognize similar quality in reports you analyze:\n\n" + "\n\n".join(examples_list)
+    
+    # Combine custom rubric and examples
+    custom_rubric = custom_rubric + good_examples
+    
     # Select appropriate prompt template
     if report_type == "Results Report":
         prompt_template = st.session_state.get("results_prompt", DEFAULT_RESULTS_ANALYSIS_PROMPT)
@@ -1868,9 +1760,10 @@ def render_admin_panel():
     """Render admin configuration interface."""
     
     st.header("⚙️ Configuration")
-    st.info("Edit prompts and criteria. Changes apply to all subsequent analyses.")
+    st.info("Edit analysis criteria, prompts, and add good examples. Changes apply to all subsequent analyses.")
     
     tabs = st.tabs([
+        "📝 Good Examples",
         "📋 Rubric Guidance",
         "💬 Tone Instructions", 
         "📊 Results Prompt",
@@ -1880,7 +1773,61 @@ def render_admin_panel():
         "🏢 Unit Registry"
     ])
     
+    # NEW: Good Examples Tab
     with tabs[0]:
+        st.subheader("📝 Good Examples")
+        st.markdown("""
+        Paste examples of **well-written** report sections here. These will be included in the AI's context 
+        to help it understand what good looks like. The AI will use these as reference when analyzing reports.
+        """)
+        
+        st.caption("**Example of a Good Outcome Statement:**")
+        if "good_outcome_example" not in st.session_state:
+            st.session_state["good_outcome_example"] = ""
+        st.session_state["good_outcome_example"] = st.text_area(
+            "Paste a well-written outcome statement:",
+            value=st.session_state.get("good_outcome_example", ""),
+            height=100,
+            key="example_outcome",
+            placeholder="e.g., Students will analyze complex business cases and recommend evidence-based solutions that consider ethical, legal, and economic factors."
+        )
+        
+        st.caption("**Example of Good Criteria for Success:**")
+        if "good_criteria_example" not in st.session_state:
+            st.session_state["good_criteria_example"] = ""
+        st.session_state["good_criteria_example"] = st.text_area(
+            "Paste well-written criteria for success:",
+            value=st.session_state.get("good_criteria_example", ""),
+            height=100,
+            key="example_criteria",
+            placeholder="e.g., 80% of students (n≥30) will score 3 or higher on the case analysis rubric (4-point scale) as evaluated by two independent faculty raters."
+        )
+        
+        st.caption("**Example of Good Proposed Improvement:**")
+        if "good_improvement_example" not in st.session_state:
+            st.session_state["good_improvement_example"] = ""
+        st.session_state["good_improvement_example"] = st.text_area(
+            "Paste a well-written proposed improvement:",
+            value=st.session_state.get("good_improvement_example", ""),
+            height=100,
+            key="example_improvement",
+            placeholder="e.g., The MKTG 3310 instructor will integrate two additional case studies focusing on ethical marketing dilemmas during Fall 2025. Assessment will be repeated in Spring 2026 using the same rubric to measure improvement."
+        )
+        
+        st.caption("**Example of Good Action Steps:**")
+        if "good_action_example" not in st.session_state:
+            st.session_state["good_action_example"] = ""
+        st.session_state["good_action_example"] = st.text_area(
+            "Paste well-written action steps:",
+            value=st.session_state.get("good_action_example", ""),
+            height=100,
+            key="example_action",
+            placeholder="e.g., (1) Dr. Smith will revise ACCT 3310 syllabus to include weekly practice problems by Aug 2025. (2) Department will offer tutoring sessions twice weekly starting Fall 2025. (3) Assessment coordinator will collect and analyze results in Dec 2025."
+        )
+        
+        st.success("These examples will be included when analyzing reports to guide the AI toward recognizing quality work.")
+    
+    with tabs[1]:
         st.subheader("Rubric Guidance")
         st.caption("Criteria for evaluating reports. Referenced in feedback.")
         st.session_state["rubric_guidance"] = st.text_area(
@@ -1893,7 +1840,7 @@ def render_admin_panel():
             st.session_state["rubric_guidance"] = DEFAULT_RUBRIC_GUIDANCE
             st.rerun()
     
-    with tabs[1]:
+    with tabs[2]:
         st.subheader("Tone Instructions")
         st.caption("Controls communication style in feedback.")
         st.session_state["tone_instructions"] = st.text_area(
@@ -1906,9 +1853,9 @@ def render_admin_panel():
             st.session_state["tone_instructions"] = DEFAULT_TONE_INSTRUCTIONS
             st.rerun()
     
-    with tabs[2]:
+    with tabs[3]:
         st.subheader("Results Report Analysis Prompt")
-        st.caption("Template for analyzing results reports. Use {placeholders} for dynamic content.")
+        st.caption("Template for analyzing results reports. The AI runs all checks internally and outputs only Strengths and Revisions Requested.")
         st.session_state["results_prompt"] = st.text_area(
             "Edit prompt:",
             value=st.session_state["results_prompt"],
@@ -1919,7 +1866,7 @@ def render_admin_panel():
             st.session_state["results_prompt"] = DEFAULT_RESULTS_ANALYSIS_PROMPT
             st.rerun()
     
-    with tabs[3]:
+    with tabs[4]:
         st.subheader("Improvement Report Analysis Prompt")
         st.session_state["improvement_prompt"] = st.text_area(
             "Edit prompt:",
@@ -1931,7 +1878,7 @@ def render_admin_panel():
             st.session_state["improvement_prompt"] = DEFAULT_IMPROVEMENT_ANALYSIS_PROMPT
             st.rerun()
     
-    with tabs[4]:
+    with tabs[5]:
         st.subheader("Next Cycle Plan Analysis Prompt")
         st.session_state["plan_prompt"] = st.text_area(
             "Edit prompt:",
@@ -1943,7 +1890,7 @@ def render_admin_panel():
             st.session_state["plan_prompt"] = DEFAULT_PLAN_ANALYSIS_PROMPT
             st.rerun()
     
-    with tabs[5]:
+    with tabs[6]:
         st.subheader("Custom Rubric Upload")
         st.caption("Upload your institution's specific rubric to supplement default criteria.")
         
@@ -1973,7 +1920,7 @@ def render_admin_panel():
                 st.session_state["custom_rubric_text"] = ""
                 st.rerun()
     
-    with tabs[6]:
+    with tabs[7]:
         st.subheader("Unit Registry Management")
         st.caption("View and manage canonical unit names.")
         
@@ -2081,66 +2028,73 @@ def main():
         
         st.divider()
         
-        # API Key
-        api_key = st.text_input(
-            "Anthropic API Key",
-            value=os.environ.get("ANTHROPIC_API_KEY", ""),
-            type="password",
-            key="api_key_input"
-        )
+        # API Key and credentials - ADMIN ONLY
+        if st.session_state["admin_mode"]:
+            with st.expander("🔑 API Configuration", expanded=False):
+                api_key = st.text_input(
+                    "Anthropic API Key",
+                    value=os.environ.get("ANTHROPIC_API_KEY", ""),
+                    type="password",
+                    key="api_key_input"
+                )
+                
+                st.divider()
+                
+                # Excel Online / Microsoft 365
+                st.caption("**Excel Online Settings**")
+                
+                ms_client_id = st.text_input(
+                    "Client ID",
+                    value=os.environ.get("MS_CLIENT_ID", ""),
+                    type="password",
+                    key="ms_client_id"
+                )
+                ms_client_secret = st.text_input(
+                    "Client Secret",
+                    value=os.environ.get("MS_CLIENT_SECRET", ""),
+                    type="password",
+                    key="ms_client_secret"
+                )
+                ms_tenant_id = st.text_input(
+                    "Tenant ID",
+                    value=os.environ.get("MS_TENANT_ID", ""),
+                    key="ms_tenant_id"
+                )
+                ms_drive_id = st.text_input(
+                    "Drive ID",
+                    value=os.environ.get("MS_DRIVE_ID", ""),
+                    key="ms_drive_id"
+                )
+                ms_item_id = st.text_input(
+                    "File Item ID",
+                    value=os.environ.get("MS_ITEM_ID", ""),
+                    key="ms_item_id"
+                )
+        else:
+            # For regular users, just load from environment
+            api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+            ms_client_id = os.environ.get("MS_CLIENT_ID", "")
+            ms_client_secret = os.environ.get("MS_CLIENT_SECRET", "")
+            ms_tenant_id = os.environ.get("MS_TENANT_ID", "")
+            ms_drive_id = os.environ.get("MS_DRIVE_ID", "")
+            ms_item_id = os.environ.get("MS_ITEM_ID", "")
         
-        st.divider()
-        
-        # Excel Online / Microsoft 365
-        st.subheader("Excel Online")
-        
-        ms_client_id = st.text_input(
-            "Client ID",
-            value=os.environ.get("MS_CLIENT_ID", ""),
-            type="password",
-            key="ms_client_id",
-            help="From Azure AD app registration"
-        )
-        ms_client_secret = st.text_input(
-            "Client Secret",
-            value=os.environ.get("MS_CLIENT_SECRET", ""),
-            type="password",
-            key="ms_client_secret"
-        )
-        ms_tenant_id = st.text_input(
-            "Tenant ID",
-            value=os.environ.get("MS_TENANT_ID", ""),
-            key="ms_tenant_id",
-            help="Your organization's tenant ID"
-        )
-        
-        st.caption("📁 Excel File Location")
-        ms_drive_id = st.text_input(
-            "Drive ID",
-            value=os.environ.get("MS_DRIVE_ID", ""),
-            key="ms_drive_id",
-            help="SharePoint document library drive ID"
-        )
-        ms_item_id = st.text_input(
-            "File Item ID",
-            value=os.environ.get("MS_ITEM_ID", ""),
-            key="ms_item_id",
-            help="The Excel file's item ID"
-        )
-        
-        # Test connection
+        # Connection status (show for all users)
         access_token = None
         excel_connected = False
         
         if ms_client_id and ms_client_secret and ms_tenant_id and ms_drive_id and ms_item_id:
-            access_token = get_graph_access_token(ms_client_id, ms_client_secret, ms_tenant_id)
-            if access_token:
-                excel_connected = True
-                st.success("✓ Connected to Microsoft 365")
+            if ms_client_id != "pending" and ms_client_secret != "pending":
+                access_token = get_graph_access_token(ms_client_id, ms_client_secret, ms_tenant_id)
+                if access_token:
+                    excel_connected = True
+                    st.success("✓ Excel Online Connected")
+                else:
+                    st.warning("⚠ Excel connection failed")
             else:
-                st.error("Connection failed")
+                st.info("📊 Excel Online: Pending setup")
         else:
-            st.info("Enter credentials to connect")
+            st.info("📊 Excel Online: Not configured")
         
         st.divider()
         

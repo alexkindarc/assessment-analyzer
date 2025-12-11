@@ -48,202 +48,392 @@ st.set_page_config(
 
 UTA_CSS = """
 <style>
-    /* UTA Brand Colors */
+    /* Clean Modern Design - UTA Colors */
     :root {
         --uta-blue: #0064b1;
-        --uta-web-blue: #003865;
+        --uta-dark-blue: #003865;
         --uta-orange: #F58025;
-        --uta-web-orange: #c45517;
-        --uta-light-gray: #f5f7fa;
+        --sidebar-bg: #f0f4f8;
+        --content-bg: #ffffff;
+        --border-color: #e1e5eb;
+        --text-primary: #1a2b3c;
+        --text-secondary: #5a6777;
+        --text-muted: #8896a6;
     }
     
-    /* Header styling */
-    .main-header {
-        background: linear-gradient(135deg, #003865 0%, #0064b1 100%);
-        padding: 1.5rem 2rem;
-        border-radius: 0 0 10px 10px;
-        margin: -1rem -1rem 1.5rem -1rem;
-        color: white;
+    /* Hide default Streamlit elements */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    
+    /* Remove top padding */
+    .block-container {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        max-width: 100%;
     }
     
-    .main-header h1 {
-        color: white !important;
-        margin: 0;
-        font-size: 1.8rem;
-    }
-    
-    .main-header p {
-        color: rgba(255,255,255,0.9);
-        margin: 0.5rem 0 0 0;
-        font-size: 0.95rem;
-    }
-    
-    /* Orange accent bar */
-    .orange-accent {
-        height: 4px;
-        background: linear-gradient(90deg, #F58025 0%, #c45517 100%);
-        margin: -1rem -1rem 1.5rem -1rem;
-        border-radius: 0 0 2px 2px;
-    }
-    
-    /* Primary buttons */
-    .stButton > button[kind="primary"] {
-        background: linear-gradient(135deg, #0064b1 0%, #003865 100%);
-        border: none;
-        color: white;
-    }
-    
-    .stButton > button[kind="primary"]:hover {
-        background: linear-gradient(135deg, #003865 0%, #002244 100%);
-        border: none;
-    }
-    
-    /* Sidebar styling - FIXED FOR READABILITY */
+    /* Sidebar - Light clean design */
     section[data-testid="stSidebar"] {
-        background-color: #003865;
+        background-color: var(--sidebar-bg);
+        border-right: 1px solid var(--border-color);
     }
     
-    section[data-testid="stSidebar"] * {
-        color: white !important;
+    section[data-testid="stSidebar"] > div {
+        padding-top: 1rem;
     }
     
-    section[data-testid="stSidebar"] .stTextInput label,
-    section[data-testid="stSidebar"] .stSelectbox label,
-    section[data-testid="stSidebar"] .stTextArea label {
-        color: white !important;
-    }
-    
-    section[data-testid="stSidebar"] .stTextInput input,
-    section[data-testid="stSidebar"] .stSelectbox select,
-    section[data-testid="stSidebar"] .stTextArea textarea {
-        background-color: white !important;
-        color: #003865 !important;
-    }
-    
+    /* Sidebar text colors - dark on light */
+    section[data-testid="stSidebar"] .stMarkdown,
     section[data-testid="stSidebar"] p,
     section[data-testid="stSidebar"] span,
     section[data-testid="stSidebar"] label {
-        color: white !important;
-    }
-    
-    section[data-testid="stSidebar"] .stMarkdown {
-        color: white !important;
+        color: var(--text-primary) !important;
     }
     
     section[data-testid="stSidebar"] h1,
     section[data-testid="stSidebar"] h2,
     section[data-testid="stSidebar"] h3 {
+        color: var(--uta-dark-blue) !important;
+    }
+    
+    /* Sidebar inputs */
+    section[data-testid="stSidebar"] .stTextInput input,
+    section[data-testid="stSidebar"] .stSelectbox > div > div {
+        background-color: white !important;
+        border: 1px solid var(--border-color) !important;
+        color: var(--text-primary) !important;
+    }
+    
+    /* Sidebar navigation buttons */
+    section[data-testid="stSidebar"] .nav-button button {
+        background-color: transparent !important;
+        border: none !important;
+        color: var(--text-primary) !important;
+        text-align: left !important;
+        padding: 0.75rem 1rem !important;
+        border-radius: 8px !important;
+        font-weight: 500 !important;
+        width: 100% !important;
+        transition: all 0.2s ease !important;
+    }
+    
+    section[data-testid="stSidebar"] .nav-button button:hover {
+        background-color: rgba(0, 100, 177, 0.1) !important;
+        color: var(--uta-blue) !important;
+    }
+    
+    section[data-testid="stSidebar"] .nav-button-active button {
+        background-color: var(--uta-blue) !important;
         color: white !important;
     }
     
+    section[data-testid="stSidebar"] .nav-button-active button:hover {
+        background-color: var(--uta-dark-blue) !important;
+        color: white !important;
+    }
+    
+    /* Sidebar dividers */
     section[data-testid="stSidebar"] hr {
-        border-color: rgba(255,255,255,0.3) !important;
+        border-color: var(--border-color) !important;
+        margin: 1rem 0 !important;
     }
     
-    /* Expander in sidebar */
+    /* Sidebar expander */
     section[data-testid="stSidebar"] .streamlit-expanderHeader {
-        background-color: rgba(255,255,255,0.1) !important;
-        color: white !important;
+        background-color: white !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 8px !important;
+        color: var(--text-primary) !important;
     }
     
     section[data-testid="stSidebar"] .streamlit-expanderContent {
-        background-color: rgba(255,255,255,0.05) !important;
+        background-color: white !important;
+        border: 1px solid var(--border-color) !important;
+        border-top: none !important;
+        border-radius: 0 0 8px 8px !important;
     }
     
-    /* Success/Info/Warning boxes in sidebar */
+    /* Status badges in sidebar */
     section[data-testid="stSidebar"] .stAlert {
-        background-color: rgba(255,255,255,0.1) !important;
+        background-color: white !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
     }
     
-    /* Main content area - ensure readability */
+    /* Main content area */
     .main .block-container {
-        color: #003865;
+        background-color: var(--content-bg);
+        color: var(--text-primary);
     }
     
-    /* Success messages with orange accent */
-    .stSuccess {
-        border-left: 4px solid #F58025;
+    /* Page title styling */
+    .page-title {
+        color: var(--uta-dark-blue);
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0;
     }
     
-    /* Info messages with blue */
-    .stInfo {
-        border-left: 4px solid #0064b1;
+    /* Section headers */
+    .section-header {
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.75rem;
+        margin-top: 1.5rem;
     }
     
-    /* Tab styling */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
+    /* Content cards */
+    .content-card {
+        background-color: white;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
     }
     
-    .stTabs [data-baseweb="tab"] {
-        border-radius: 4px 4px 0 0;
-        padding: 10px 20px;
-        background-color: #f5f7fa;
-        color: #003865 !important;
+    /* Form field styling */
+    .stTextInput > label,
+    .stSelectbox > label,
+    .stTextArea > label {
+        color: var(--text-primary) !important;
+        font-weight: 500 !important;
+        font-size: 0.875rem !important;
     }
     
-    .stTabs [aria-selected="true"] {
-        background-color: #0064b1 !important;
+    .stTextInput input,
+    .stSelectbox > div > div,
+    .stTextArea textarea {
+        border: 1px solid var(--border-color) !important;
+        border-radius: 8px !important;
+        padding: 0.625rem 0.875rem !important;
+    }
+    
+    .stTextInput input:focus,
+    .stSelectbox > div > div:focus,
+    .stTextArea textarea:focus {
+        border-color: var(--uta-blue) !important;
+        box-shadow: 0 0 0 3px rgba(0, 100, 177, 0.1) !important;
+    }
+    
+    /* Primary button */
+    .stButton > button[kind="primary"] {
+        background-color: var(--uta-blue) !important;
+        border: none !important;
+        border-radius: 8px !important;
         color: white !important;
+        font-weight: 500 !important;
+        padding: 0.625rem 1.25rem !important;
+        transition: all 0.2s ease !important;
     }
     
-    /* Expander styling in main content */
-    .main .streamlit-expanderHeader {
-        background-color: #f5f7fa;
-        border-radius: 4px;
-        color: #003865 !important;
+    .stButton > button[kind="primary"]:hover {
+        background-color: var(--uta-dark-blue) !important;
+        box-shadow: 0 4px 12px rgba(0, 100, 177, 0.3) !important;
     }
     
-    .main .streamlit-expanderHeader:hover {
-        background-color: #e8ecf0;
+    /* Secondary button */
+    .stButton > button[kind="secondary"],
+    .stDownloadButton > button {
+        background-color: white !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 8px !important;
+        color: var(--text-primary) !important;
+        font-weight: 500 !important;
     }
     
-    /* Footer styling */
-    .uta-footer {
-        background-color: #003865;
-        color: white;
-        padding: 1rem;
-        border-radius: 5px;
-        margin-top: 2rem;
-        text-align: center;
-    }
-    
-    .uta-footer a {
-        color: #F58025;
-    }
-    
-    /* Data editor styling */
-    .stDataFrame {
-        border: 1px solid #e0e0e0;
-        border-radius: 4px;
+    .stButton > button[kind="secondary"]:hover,
+    .stDownloadButton > button:hover {
+        background-color: var(--sidebar-bg) !important;
+        border-color: var(--uta-blue) !important;
     }
     
     /* File uploader */
     [data-testid="stFileUploader"] {
-        border: 2px dashed #0064b1;
-        border-radius: 8px;
-        padding: 1rem;
+        background-color: white;
+        border: 2px dashed var(--border-color);
+        border-radius: 12px;
+        padding: 2rem;
+        transition: all 0.2s ease;
     }
     
     [data-testid="stFileUploader"]:hover {
-        border-color: #F58025;
-        background-color: #fef8f3;
+        border-color: var(--uta-blue);
+        background-color: rgba(0, 100, 177, 0.02);
     }
     
-    /* Fix any blue text on blue issues */
-    .stMarkdown a {
-        color: #0064b1 !important;
+    /* Success/Info/Warning alerts */
+    .stSuccess {
+        background-color: #f0fdf4 !important;
+        border: 1px solid #86efac !important;
+        border-radius: 8px !important;
+        color: #166534 !important;
     }
     
-    /* Ensure form labels are dark on light background */
-    .main label {
-        color: #003865 !important;
+    .stInfo {
+        background-color: #eff6ff !important;
+        border: 1px solid #93c5fd !important;
+        border-radius: 8px !important;
+        color: #1e40af !important;
     }
     
-    .main .stTextInput label,
-    .main .stSelectbox label,
-    .main .stTextArea label {
-        color: #003865 !important;
+    .stWarning {
+        background-color: #fffbeb !important;
+        border: 1px solid #fcd34d !important;
+        border-radius: 8px !important;
+        color: #92400e !important;
+    }
+    
+    .stError {
+        background-color: #fef2f2 !important;
+        border: 1px solid #fca5a5 !important;
+        border-radius: 8px !important;
+        color: #991b1b !important;
+    }
+    
+    /* Expander in main content */
+    .main .streamlit-expanderHeader {
+        background-color: var(--sidebar-bg) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 8px !important;
+        color: var(--text-primary) !important;
+        font-weight: 500 !important;
+    }
+    
+    .main .streamlit-expanderContent {
+        border: 1px solid var(--border-color) !important;
+        border-top: none !important;
+        border-radius: 0 0 8px 8px !important;
+        background-color: white !important;
+    }
+    
+    /* Tabs styling */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 0;
+        background-color: var(--sidebar-bg);
+        border-radius: 8px;
+        padding: 4px;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        border-radius: 6px;
+        padding: 8px 16px;
+        color: var(--text-secondary) !important;
+        font-weight: 500;
+        background-color: transparent;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background-color: white !important;
+        color: var(--uta-blue) !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    /* Divider */
+    hr {
+        border: none;
+        border-top: 1px solid var(--border-color);
+        margin: 1.5rem 0;
+    }
+    
+    /* Footer */
+    .app-footer {
+        text-align: center;
+        padding: 1.5rem;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        border-top: 1px solid var(--border-color);
+        margin-top: 2rem;
+    }
+    
+    /* Analysis results card */
+    .results-card {
+        background-color: white;
+        border: 1px solid var(--border-color);
+        border-left: 4px solid var(--uta-blue);
+        border-radius: 8px;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Metadata field groups */
+    .field-group {
+        background-color: var(--sidebar-bg);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .field-group-title {
+        color: var(--text-muted);
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.75rem;
+    }
+    
+    /* Outcome card */
+    .outcome-card {
+        background-color: white;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    /* Spinner */
+    .stSpinner > div {
+        border-color: var(--uta-blue) !important;
+    }
+    
+    /* Caption text */
+    .stCaption {
+        color: var(--text-muted) !important;
+    }
+    
+    /* Logo area */
+    .logo-area {
+        padding: 1rem 0.5rem 1.5rem 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 1rem;
+    }
+    
+    .logo-text {
+        color: var(--uta-dark-blue);
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.3;
+    }
+    
+    /* Connection status pill */
+    .status-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+    
+    .status-connected {
+        background-color: #dcfce7;
+        color: #166534;
+    }
+    
+    .status-pending {
+        background-color: #fef3c7;
+        color: #92400e;
+    }
+    
+    .status-disconnected {
+        background-color: #f3f4f6;
+        color: #6b7280;
     }
 </style>
 """
@@ -253,23 +443,14 @@ def inject_uta_branding():
     st.markdown(UTA_CSS, unsafe_allow_html=True)
 
 def render_uta_header(title: str, subtitle: str = None):
-    """Render UTA-branded header."""
-    header_html = f"""
-    <div class="main-header">
-        <h1>📊 {title}</h1>
-        {f'<p>{subtitle}</p>' if subtitle else ''}
-    </div>
-    <div class="orange-accent"></div>
-    """
-    st.markdown(header_html, unsafe_allow_html=True)
+    """Render clean page header."""
+    st.markdown(f'<h1 class="page-title">{title}</h1>', unsafe_allow_html=True)
 
 def render_uta_footer():
-    """Render UTA-branded footer."""
+    """Render clean footer."""
     footer_html = """
-    <div class="uta-footer">
-        <strong>Assessment Report Analyzer</strong><br>
-        Office of Institutional Effectiveness and Reporting<br>
-        <span style="color: rgba(255,255,255,0.7);">The University of Texas at Arlington</span>
+    <div class="app-footer">
+        <strong>Assessment Report Analyzer</strong> · Office of Institutional Effectiveness and Reporting · The University of Texas at Arlington
     </div>
     """
     st.markdown(footer_html, unsafe_allow_html=True)
@@ -598,31 +779,32 @@ def check_password():
         # Inject branding for login page
         inject_uta_branding()
         
-        # UTA-branded login page
+        # Clean login page
         st.markdown("""
-        <div style="text-align: center; padding: 2rem 0;">
-            <h1 style="color: #003865;">📊 Assessment Report Analyzer</h1>
-            <p style="color: #0064b1; font-size: 1.1rem;">Office of Institutional Effectiveness and Reporting</p>
-            <p style="color: #666;">The University of Texas at Arlington</p>
+        <div style="text-align: center; padding: 3rem 0 2rem 0;">
+            <h1 style="color: #003865; font-weight: 700; margin-bottom: 0.5rem;">Assessment Analyzer</h1>
+            <p style="color: #5a6777; font-size: 1rem;">Office of Institutional Effectiveness and Reporting</p>
+            <p style="color: #8896a6; font-size: 0.875rem;">The University of Texas at Arlington</p>
         </div>
         """, unsafe_allow_html=True)
         
-        col1, col2, col3 = st.columns([1, 2, 1])
+        col1, col2, col3 = st.columns([1, 1.5, 1])
         with col2:
             st.markdown("""
-            <div style="background: white; padding: 2rem; border-radius: 10px; 
-                        box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-top: 4px solid #F58025;">
+            <div style="background: white; padding: 2rem; border-radius: 12px; 
+                        box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e1e5eb;">
             """, unsafe_allow_html=True)
             
             st.text_input(
-                "Enter password:", 
+                "Password", 
                 type="password", 
                 key="password",
-                on_change=password_entered
+                on_change=password_entered,
+                placeholder="Enter your password"
             )
             
-            st.info("Contact your administrator for access credentials.")
-            st.caption("Admin credentials provide access to configuration settings.")
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.caption("Contact your administrator for access credentials.")
             
             st.markdown("</div>", unsafe_allow_html=True)
         
@@ -1665,7 +1847,8 @@ def render_batch_import(api_key: str, access_token: str, drive_id: str, item_id:
                         excel_connected: bool, registry: dict):
     """Render batch import interface."""
     
-    st.header("📦 Batch Import Mode")
+    render_uta_header("Batch Import")
+    
     st.info("Upload multiple historical reports to populate the metadata database. No analysis will be performed.")
     
     report_type = st.selectbox(
@@ -1759,18 +1942,19 @@ def render_batch_import(api_key: str, access_token: str, drive_id: str, item_id:
 def render_admin_panel():
     """Render admin configuration interface."""
     
-    st.header("⚙️ Configuration")
-    st.info("Edit analysis criteria, prompts, and add good examples. Changes apply to all subsequent analyses.")
+    render_uta_header("Configuration")
+    
+    st.info("Edit analysis criteria, prompts, and add quality examples. Changes apply to all subsequent analyses.")
     
     tabs = st.tabs([
-        "📝 Good Examples",
-        "📋 Rubric Guidance",
-        "💬 Tone Instructions", 
-        "📊 Results Prompt",
-        "📈 Improvement Prompt",
-        "📅 Plan Prompt",
-        "📄 Custom Rubric",
-        "🏢 Unit Registry"
+        "Good Examples",
+        "Rubric Guidance",
+        "Tone Instructions", 
+        "Results Prompt",
+        "Improvement Prompt",
+        "Plan Prompt",
+        "Custom Rubric",
+        "Unit Registry"
     ])
     
     # NEW: Good Examples Tab
@@ -2011,26 +2195,53 @@ def main():
     # Load unit registry
     registry = load_unit_registry()
     
+    # Initialize navigation state
+    if "current_page" not in st.session_state:
+        st.session_state["current_page"] = "analyze"
+    
     # Sidebar
     with st.sidebar:
-        # UTA Logo/Header area
+        # Logo area - clean, bold text
         st.markdown("""
-        <div style="text-align: center; padding: 1rem 0; border-bottom: 2px solid rgba(255,255,255,0.2); margin-bottom: 1rem;">
-            <h2 style="color: white; margin: 0;">📊 Assessment<br>Analyzer</h2>
-            <p style="color: #F58025; font-size: 0.85rem; margin: 0.5rem 0 0 0;">UTA Institutional Effectiveness</p>
+        <div class="logo-area">
+            <div class="logo-text">Assessment<br>Analyzer</div>
         </div>
         """, unsafe_allow_html=True)
         
+        # Navigation section
+        st.markdown('<p style="color: #8896a6; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Pages</p>', unsafe_allow_html=True)
+        
+        # Navigation buttons with active state styling
+        nav_class = "nav-button-active" if st.session_state["current_page"] == "analyze" else "nav-button"
+        st.markdown(f'<div class="{nav_class}">', unsafe_allow_html=True)
+        if st.button("Analyze Report", key="nav_analyze", use_container_width=True):
+            st.session_state["current_page"] = "analyze"
+            st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        nav_class = "nav-button-active" if st.session_state["current_page"] == "batch" else "nav-button"
+        st.markdown(f'<div class="{nav_class}">', unsafe_allow_html=True)
+        if st.button("Batch Import", key="nav_batch", use_container_width=True):
+            st.session_state["current_page"] = "batch"
+            st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
+        
         if st.session_state["admin_mode"]:
-            st.success("🔓 Admin Mode")
-        else:
-            st.info("👤 User Mode")
+            nav_class = "nav-button-active" if st.session_state["current_page"] == "config" else "nav-button"
+            st.markdown(f'<div class="{nav_class}">', unsafe_allow_html=True)
+            if st.button("Configuration", key="nav_config", use_container_width=True):
+                st.session_state["current_page"] = "config"
+                st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
         
         st.divider()
         
-        # API Key and credentials - ADMIN ONLY
+        # Connection status
+        st.markdown('<p style="color: #8896a6; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Status</p>', unsafe_allow_html=True)
+        
+        # Load credentials
         if st.session_state["admin_mode"]:
-            with st.expander("🔑 API Configuration", expanded=False):
+            with st.expander("API Configuration", expanded=False):
                 api_key = st.text_input(
                     "Anthropic API Key",
                     value=os.environ.get("ANTHROPIC_API_KEY", ""),
@@ -2038,40 +2249,15 @@ def main():
                     key="api_key_input"
                 )
                 
-                st.divider()
+                st.markdown("---")
+                st.markdown("**Excel Online**")
                 
-                # Excel Online / Microsoft 365
-                st.caption("**Excel Online Settings**")
-                
-                ms_client_id = st.text_input(
-                    "Client ID",
-                    value=os.environ.get("MS_CLIENT_ID", ""),
-                    type="password",
-                    key="ms_client_id"
-                )
-                ms_client_secret = st.text_input(
-                    "Client Secret",
-                    value=os.environ.get("MS_CLIENT_SECRET", ""),
-                    type="password",
-                    key="ms_client_secret"
-                )
-                ms_tenant_id = st.text_input(
-                    "Tenant ID",
-                    value=os.environ.get("MS_TENANT_ID", ""),
-                    key="ms_tenant_id"
-                )
-                ms_drive_id = st.text_input(
-                    "Drive ID",
-                    value=os.environ.get("MS_DRIVE_ID", ""),
-                    key="ms_drive_id"
-                )
-                ms_item_id = st.text_input(
-                    "File Item ID",
-                    value=os.environ.get("MS_ITEM_ID", ""),
-                    key="ms_item_id"
-                )
+                ms_client_id = st.text_input("Client ID", value=os.environ.get("MS_CLIENT_ID", ""), type="password", key="ms_client_id")
+                ms_client_secret = st.text_input("Client Secret", value=os.environ.get("MS_CLIENT_SECRET", ""), type="password", key="ms_client_secret")
+                ms_tenant_id = st.text_input("Tenant ID", value=os.environ.get("MS_TENANT_ID", ""), key="ms_tenant_id")
+                ms_drive_id = st.text_input("Drive ID", value=os.environ.get("MS_DRIVE_ID", ""), key="ms_drive_id")
+                ms_item_id = st.text_input("Item ID", value=os.environ.get("MS_ITEM_ID", ""), key="ms_item_id")
         else:
-            # For regular users, just load from environment
             api_key = os.environ.get("ANTHROPIC_API_KEY", "")
             ms_client_id = os.environ.get("MS_CLIENT_ID", "")
             ms_client_secret = os.environ.get("MS_CLIENT_SECRET", "")
@@ -2079,7 +2265,7 @@ def main():
             ms_drive_id = os.environ.get("MS_DRIVE_ID", "")
             ms_item_id = os.environ.get("MS_ITEM_ID", "")
         
-        # Connection status (show for all users)
+        # Check Excel connection
         access_token = None
         excel_connected = False
         
@@ -2088,197 +2274,262 @@ def main():
                 access_token = get_graph_access_token(ms_client_id, ms_client_secret, ms_tenant_id)
                 if access_token:
                     excel_connected = True
-                    st.success("✓ Excel Online Connected")
+                    st.markdown('<span class="status-pill status-connected">● Excel Connected</span>', unsafe_allow_html=True)
                 else:
-                    st.warning("⚠ Excel connection failed")
+                    st.markdown('<span class="status-pill status-pending">● Excel Error</span>', unsafe_allow_html=True)
             else:
-                st.info("📊 Excel Online: Pending setup")
+                st.markdown('<span class="status-pill status-pending">● Excel Pending</span>', unsafe_allow_html=True)
         else:
-            st.info("📊 Excel Online: Not configured")
+            st.markdown('<span class="status-pill status-disconnected">○ Excel Not Configured</span>', unsafe_allow_html=True)
         
+        # User mode
+        st.markdown("<br>", unsafe_allow_html=True)
+        if st.session_state["admin_mode"]:
+            st.markdown('<span class="status-pill status-connected">Admin Mode</span>', unsafe_allow_html=True)
+        else:
+            st.markdown('<span class="status-pill status-disconnected">User Mode</span>', unsafe_allow_html=True)
+        
+        # Spacer
+        st.markdown("<br><br><br>", unsafe_allow_html=True)
+        
+        # Logout at bottom
         st.divider()
-        
-        # Cost estimate
-        st.caption("**Estimated Costs:**")
-        st.caption("Short report: ~$0.03-0.04")
-        st.caption("Medium report: ~$0.06-0.08")
-        st.caption("Long report: ~$0.10-0.12")
-        
-        st.divider()
-        
-        if st.button("Logout"):
+        if st.button("Logout", key="logout_btn", use_container_width=True):
             st.session_state["authenticated"] = False
             st.session_state["admin_mode"] = False
             st.rerun()
     
-    # Main content
-    render_uta_header(
-        "Assessment Report Analyzer",
-        "Office of Institutional Effectiveness and Reporting"
-    )
-    
-    # Navigation
-    if st.session_state["admin_mode"]:
-        tab_names = ["📤 Analyze Report", "📦 Batch Import", "⚙️ Configuration"]
-    else:
-        tab_names = ["📤 Analyze Report", "📦 Batch Import"]
-    
-    tabs = st.tabs(tab_names)
-    
-    # ANALYZE REPORT TAB
-    with tabs[0]:
-        col1, col2 = st.columns([1, 1])
-        
-        with col1:
-            st.header("Upload Report")
-            
-            report_type = st.selectbox(
-                "Report Type",
-                REPORT_TYPES,
-                key="report_type"
-            )
-            
-            uploaded_file = st.file_uploader(
-                "Choose a report",
-                type=["pdf", "docx", "txt"],
-                key="single_upload"
-            )
-            
-            if uploaded_file:
-                st.success(f"Uploaded: {uploaded_file.name}")
-                
-                with st.spinner("Extracting text..."):
-                    report_text = process_uploaded_file(uploaded_file)
-                
-                if report_text:
-                    with st.expander("📄 Preview extracted text"):
-                        st.text(report_text[:3000] + "..." if len(report_text) > 3000 else report_text)
-                    
-                    # Analysis button
-                    if st.button("🔍 Analyze Report", type="primary", use_container_width=True):
-                        if not api_key:
-                            st.error("Please enter your Anthropic API key in the sidebar.")
-                        else:
-                            # Extract metadata
-                            with st.spinner("Extracting metadata..."):
-                                metadata = extract_metadata_with_ai(report_text, report_type, api_key)
-                            
-                            if "error" in metadata:
-                                st.error(f"Metadata extraction error: {metadata['error']}")
-                            else:
-                                st.session_state["extracted_metadata"] = metadata
-                                st.session_state["filename"] = uploaded_file.name
-                            
-                            # Get historical context if available
-                            stagnation_info = None
-                            previous_improvements = None
-                            
-                            if excel_connected and access_token and ms_drive_id and ms_item_id and metadata.get("unit_id"):
-                                if report_type == "Results Report":
-                                    # Check for stagnation
-                                    for outcome in metadata.get("outcomes", []):
-                                        stag = check_stagnation(
-                                            access_token, ms_drive_id, ms_item_id,
-                                            metadata.get("unit_id", ""),
-                                            outcome.get("outcome_id", ""),
-                                            outcome.get("assessment_method", ""),
-                                            metadata.get("academic_year", "")
-                                        )
-                                        if stag.get("stagnant"):
-                                            stagnation_info = stag
-                                            break
-                                
-                                elif report_type == "Improvement Report":
-                                    # Get previous improvements for context
-                                    match = find_matching_unit(
-                                        metadata.get("unit_name", ""),
-                                        metadata.get("unit_type", "Academic"),
-                                        registry
-                                    )
-                                    if match["match"]:
-                                        previous_improvements = get_previous_improvements_excel(
-                                            access_token, ms_drive_id, ms_item_id,
-                                            match["match"].get("unit_id", "")
-                                        )
-                            
-                            # Run analysis
-                            with st.spinner("Analyzing report..."):
-                                results = analyze_report(
-                                    report_text, 
-                                    report_type, 
-                                    api_key,
-                                    stagnation_info,
-                                    previous_improvements
-                                )
-                            
-                            if "error" in results:
-                                st.error(f"Analysis error: {results['error']}")
-                            else:
-                                st.session_state["results"] = results
-        
-        with col2:
-            st.header("Analysis & Metadata")
-            
-            # Show analysis results
-            if st.session_state.get("results"):
-                results = st.session_state["results"]
-                
-                st.caption(f"Tokens: {results['tokens']['input']} in / {results['tokens']['output']} out | Cost: {results['cost']}")
-                
-                st.markdown(results["analysis"])
-                
-                st.divider()
-            
-            # Show metadata editor
-            if st.session_state.get("extracted_metadata"):
-                metadata = st.session_state["extracted_metadata"]
-                
-                edited_metadata = render_metadata_editor(metadata, report_type, registry)
-                
-                st.divider()
-                
-                col_a, col_b = st.columns(2)
-                
-                with col_a:
-                    if st.button("💾 Save to Excel Online", type="primary", use_container_width=True):
-                        if not excel_connected or not access_token:
-                            st.error("Excel Online not connected. Configure in sidebar.")
-                        else:
-                            rows = prepare_rows_for_sheet(edited_metadata, report_type)
-                            if save_metadata_to_excel_online(access_token, ms_drive_id, ms_item_id, rows, report_type):
-                                st.success("Metadata saved successfully!")
-                                st.session_state["extracted_metadata"] = None
-                            else:
-                                st.error("Failed to save metadata.")
-                
-                with col_b:
-                    # Excel download
-                    rows = prepare_rows_for_sheet(edited_metadata, report_type)
-                    df = pd.DataFrame(rows)
-                    
-                    buffer = BytesIO()
-                    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
-                        df.to_excel(writer, index=False)
-                    
-                    st.download_button(
-                        "📥 Download Excel",
-                        data=buffer.getvalue(),
-                        file_name=f"metadata_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
-                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                        use_container_width=True
-                    )
-    
-    # BATCH IMPORT TAB
-    with tabs[1]:
-        render_batch_import(api_key, access_token, ms_drive_id, ms_item_id, excel_connected, registry)
-    
-    # CONFIGURATION TAB (admin only)
-    if st.session_state["admin_mode"]:
-        with tabs[2]:
-            render_admin_panel()
+    # Main content area based on current page
+    if st.session_state["current_page"] == "analyze":
+        render_analyze_page(api_key, access_token, ms_drive_id, ms_item_id, excel_connected, registry)
+    elif st.session_state["current_page"] == "batch":
+        render_batch_page(api_key, access_token, ms_drive_id, ms_item_id, excel_connected, registry)
+    elif st.session_state["current_page"] == "config" and st.session_state["admin_mode"]:
+        render_admin_panel()
     
     # Footer
     render_uta_footer()
+
+
+def render_analyze_page(api_key, access_token, ms_drive_id, ms_item_id, excel_connected, registry):
+    """Render the main analysis page with clean design."""
+    
+    render_uta_header("Analyze Report")
+    
+    # Two column layout
+    col1, col2 = st.columns([1, 1], gap="large")
+    
+    with col1:
+        # UPLOAD SECTION
+        st.markdown('<p class="section-header">Upload</p>', unsafe_allow_html=True)
+        
+        report_type = st.selectbox(
+            "Report Type",
+            REPORT_TYPES,
+            key="report_type"
+        )
+        
+        uploaded_file = st.file_uploader(
+            "Drop your report here or click to browse",
+            type=["pdf", "docx", "txt"],
+            key="single_upload"
+        )
+        
+        if uploaded_file:
+            st.success(f"✓ {uploaded_file.name}")
+            
+            with st.spinner("Extracting text..."):
+                report_text = process_uploaded_file(uploaded_file)
+            
+            if report_text:
+                with st.expander("Preview extracted text", expanded=False):
+                    st.text(report_text[:3000] + "..." if len(report_text) > 3000 else report_text)
+                
+                st.markdown("<br>", unsafe_allow_html=True)
+                
+                if st.button("Analyze Report", type="primary", use_container_width=True):
+                    if not api_key:
+                        st.error("API key not configured.")
+                    else:
+                        # Extract metadata
+                        with st.spinner("Extracting metadata..."):
+                            metadata = extract_metadata_with_ai(report_text, report_type, api_key)
+                        
+                        if "error" in metadata:
+                            st.error(f"Error: {metadata['error']}")
+                        else:
+                            st.session_state["extracted_metadata"] = metadata
+                            st.session_state["filename"] = uploaded_file.name
+                        
+                        # Historical context
+                        stagnation_info = None
+                        previous_improvements = None
+                        
+                        if excel_connected and access_token and ms_drive_id and ms_item_id and metadata.get("unit_id"):
+                            if report_type == "Results Report":
+                                for outcome in metadata.get("outcomes", []):
+                                    stag = check_stagnation(
+                                        access_token, ms_drive_id, ms_item_id,
+                                        metadata.get("unit_id", ""),
+                                        outcome.get("outcome_id", ""),
+                                        outcome.get("assessment_method", ""),
+                                        metadata.get("academic_year", "")
+                                    )
+                                    if stag.get("stagnant"):
+                                        stagnation_info = stag
+                                        break
+                            
+                            elif report_type == "Improvement Report":
+                                match = find_matching_unit(
+                                    metadata.get("unit_name", ""),
+                                    metadata.get("unit_type", "Academic"),
+                                    registry
+                                )
+                                if match["match"]:
+                                    previous_improvements = get_previous_improvements_excel(
+                                        access_token, ms_drive_id, ms_item_id,
+                                        match["match"].get("unit_id", "")
+                                    )
+                        
+                        # Run analysis
+                        with st.spinner("Analyzing..."):
+                            results = analyze_report(
+                                report_text, 
+                                report_type, 
+                                api_key,
+                                stagnation_info,
+                                previous_improvements
+                            )
+                        
+                        if "error" in results:
+                            st.error(f"Error: {results['error']}")
+                        else:
+                            st.session_state["results"] = results
+    
+    with col2:
+        # RESULTS SECTION
+        st.markdown('<p class="section-header">Analysis Results</p>', unsafe_allow_html=True)
+        
+        if st.session_state.get("results"):
+            results = st.session_state["results"]
+            
+            st.caption(f"Cost: {results['cost']} · {results['tokens']['input']} in / {results['tokens']['output']} out tokens")
+            
+            st.markdown('<div class="results-card">', unsafe_allow_html=True)
+            st.markdown(results["analysis"])
+            st.markdown('</div>', unsafe_allow_html=True)
+        else:
+            st.info("Upload a report and click 'Analyze Report' to see results.")
+        
+        # METADATA SECTION
+        if st.session_state.get("extracted_metadata"):
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown('<p class="section-header">Extracted Metadata</p>', unsafe_allow_html=True)
+            
+            metadata = st.session_state["extracted_metadata"]
+            report_type = st.session_state.get("report_type", "Results Report")
+            
+            edited_metadata = render_metadata_editor(metadata, report_type, registry)
+            
+            st.markdown("<br>", unsafe_allow_html=True)
+            
+            col_a, col_b = st.columns(2)
+            
+            with col_a:
+                if st.button("Save to Excel Online", type="primary", use_container_width=True):
+                    if not excel_connected or not access_token:
+                        st.error("Excel Online not connected.")
+                    else:
+                        rows = prepare_rows_for_sheet(edited_metadata, report_type)
+                        if save_metadata_to_excel_online(access_token, ms_drive_id, ms_item_id, rows, report_type):
+                            st.success("✓ Saved!")
+                            st.session_state["extracted_metadata"] = None
+                        else:
+                            st.error("Save failed.")
+            
+            with col_b:
+                rows = prepare_rows_for_sheet(edited_metadata, report_type)
+                df = pd.DataFrame(rows)
+                
+                buffer = BytesIO()
+                with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+                    df.to_excel(writer, index=False)
+                
+                st.download_button(
+                    "Download Excel",
+                    data=buffer.getvalue(),
+                    file_name=f"metadata_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    use_container_width=True
+                )
+
+
+def render_batch_page(api_key, access_token, ms_drive_id, ms_item_id, excel_connected, registry):
+    """Render batch import page with clean design."""
+    
+    render_uta_header("Batch Import")
+    
+    st.info("Upload multiple historical reports to populate the metadata database. Analysis will not be performed.")
+    
+    st.markdown('<p class="section-header">Settings</p>', unsafe_allow_html=True)
+    
+    report_type = st.selectbox(
+        "Report Type (all files must be same type)",
+        REPORT_TYPES,
+        key="batch_report_type"
+    )
+    
+    st.markdown('<p class="section-header">Files</p>', unsafe_allow_html=True)
+    
+    uploaded_files = st.file_uploader(
+        "Drop files here or click to browse",
+        type=["pdf", "docx", "txt"],
+        accept_multiple_files=True,
+        key="batch_files_upload"
+    )
+    
+    if uploaded_files:
+        st.success(f"✓ {len(uploaded_files)} files selected")
+        
+        if st.button("Extract Metadata from All Files", type="primary"):
+            all_metadata = []
+            progress = st.progress(0)
+            
+            for i, file in enumerate(uploaded_files):
+                with st.spinner(f"Processing {file.name}..."):
+                    text = process_uploaded_file(file)
+                    if text:
+                        metadata = extract_metadata_with_ai(text, report_type, api_key)
+                        if "error" not in metadata:
+                            metadata["_filename"] = file.name
+                            all_metadata.append(metadata)
+                        else:
+                            st.warning(f"Error with {file.name}: {metadata['error']}")
+                progress.progress((i + 1) / len(uploaded_files))
+            
+            st.session_state["batch_metadata"] = all_metadata
+            st.success(f"✓ Extracted metadata from {len(all_metadata)} files")
+        
+        if st.session_state.get("batch_metadata"):
+            st.markdown('<p class="section-header">Extracted Data</p>', unsafe_allow_html=True)
+            
+            for meta in st.session_state["batch_metadata"]:
+                with st.expander(f"{meta.get('_filename', 'Unknown')} - {meta.get('unit_name', 'Unknown Unit')}"):
+                    st.json(meta)
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                if st.button("Save All to Excel Online", type="primary", use_container_width=True):
+                    if not excel_connected or not access_token:
+                        st.error("Excel Online not connected.")
+                    else:
+                        success_count = 0
+                        for meta in st.session_state["batch_metadata"]:
+                            rows = prepare_rows_for_sheet(meta, report_type)
+                            if save_metadata_to_excel_online(access_token, ms_drive_id, ms_item_id, rows, report_type):
+                                success_count += 1
+                        st.success(f"✓ Saved {success_count} of {len(st.session_state['batch_metadata'])} records")
 
 if __name__ == "__main__":
     main()

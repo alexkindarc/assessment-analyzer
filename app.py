@@ -66,6 +66,16 @@ UTA_CSS = """
     footer {visibility: hidden;}
     header {visibility: hidden;}
     
+    /* PREVENT SIDEBAR COLLAPSE */
+    [data-testid="collapsedControl"] {
+        display: none !important;
+    }
+    
+    section[data-testid="stSidebar"] {
+        min-width: 280px !important;
+        width: 280px !important;
+    }
+    
     /* Remove top padding */
     .block-container {
         padding-top: 1rem;
@@ -73,7 +83,7 @@ UTA_CSS = """
         max-width: 100%;
     }
     
-    /* Sidebar - Light clean design */
+    /* Sidebar - Light clean design with accent */
     section[data-testid="stSidebar"] {
         background-color: var(--sidebar-bg);
         border-right: 1px solid var(--border-color);
@@ -168,24 +178,28 @@ UTA_CSS = """
         color: var(--text-primary);
     }
     
-    /* Page title styling */
+    /* Page title styling with orange accent */
     .page-title {
         color: var(--uta-dark-blue);
         font-size: 1.5rem;
         font-weight: 600;
-        margin-bottom: 1.5rem;
-        padding-bottom: 0;
+        margin-bottom: 0.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 3px solid var(--uta-orange);
+        display: inline-block;
     }
     
-    /* Section headers */
+    /* Section headers with accent */
     .section-header {
-        color: var(--text-muted);
-        font-size: 0.75rem;
+        color: var(--uta-dark-blue);
+        font-size: 0.8rem;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.5px;
         margin-bottom: 0.75rem;
         margin-top: 1.5rem;
+        padding-left: 0.5rem;
+        border-left: 3px solid var(--uta-orange);
     }
     
     /* Content cards */
@@ -207,11 +221,44 @@ UTA_CSS = """
     }
     
     .stTextInput input,
-    .stSelectbox > div > div,
     .stTextArea textarea {
         border: 1px solid var(--border-color) !important;
         border-radius: 8px !important;
         padding: 0.625rem 0.875rem !important;
+        color: var(--text-primary) !important;
+    }
+    
+    /* FIX SELECTBOX TEXT VISIBILITY */
+    .stSelectbox > div > div {
+        border: 1px solid var(--border-color) !important;
+        border-radius: 8px !important;
+        background-color: white !important;
+    }
+    
+    .stSelectbox > div > div > div {
+        color: var(--text-primary) !important;
+    }
+    
+    .stSelectbox [data-baseweb="select"] > div {
+        background-color: white !important;
+        color: var(--text-primary) !important;
+    }
+    
+    .stSelectbox [data-baseweb="select"] span {
+        color: var(--text-primary) !important;
+    }
+    
+    /* Dropdown menu items */
+    [data-baseweb="popover"] {
+        background-color: white !important;
+    }
+    
+    [data-baseweb="popover"] li {
+        color: var(--text-primary) !important;
+    }
+    
+    [data-baseweb="popover"] li:hover {
+        background-color: var(--sidebar-bg) !important;
     }
     
     .stTextInput input:focus,
@@ -221,7 +268,7 @@ UTA_CSS = """
         box-shadow: 0 0 0 3px rgba(0, 100, 177, 0.1) !important;
     }
     
-    /* Primary button */
+    /* Primary button with orange accent on hover */
     .stButton > button[kind="primary"] {
         background-color: var(--uta-blue) !important;
         border: none !important;
@@ -253,7 +300,7 @@ UTA_CSS = """
         border-color: var(--uta-blue) !important;
     }
     
-    /* File uploader */
+    /* File uploader with accent */
     [data-testid="stFileUploader"] {
         background-color: white;
         border: 2px dashed var(--border-color);
@@ -263,14 +310,15 @@ UTA_CSS = """
     }
     
     [data-testid="stFileUploader"]:hover {
-        border-color: var(--uta-blue);
-        background-color: rgba(0, 100, 177, 0.02);
+        border-color: var(--uta-orange);
+        background-color: rgba(245, 128, 37, 0.02);
     }
     
-    /* Success/Info/Warning alerts */
+    /* Success/Info/Warning alerts with accents */
     .stSuccess {
         background-color: #f0fdf4 !important;
         border: 1px solid #86efac !important;
+        border-left: 4px solid #22c55e !important;
         border-radius: 8px !important;
         color: #166534 !important;
     }
@@ -278,6 +326,7 @@ UTA_CSS = """
     .stInfo {
         background-color: #eff6ff !important;
         border: 1px solid #93c5fd !important;
+        border-left: 4px solid var(--uta-blue) !important;
         border-radius: 8px !important;
         color: #1e40af !important;
     }
@@ -285,6 +334,7 @@ UTA_CSS = """
     .stWarning {
         background-color: #fffbeb !important;
         border: 1px solid #fcd34d !important;
+        border-left: 4px solid var(--uta-orange) !important;
         border-radius: 8px !important;
         color: #92400e !important;
     }
@@ -292,6 +342,7 @@ UTA_CSS = """
     .stError {
         background-color: #fef2f2 !important;
         border: 1px solid #fca5a5 !important;
+        border-left: 4px solid #ef4444 !important;
         border-radius: 8px !important;
         color: #991b1b !important;
     }
@@ -312,7 +363,7 @@ UTA_CSS = """
         background-color: white !important;
     }
     
-    /* Tabs styling */
+    /* Tabs styling with orange accent */
     .stTabs [data-baseweb="tab-list"] {
         gap: 0;
         background-color: var(--sidebar-bg);
@@ -332,6 +383,7 @@ UTA_CSS = """
         background-color: white !important;
         color: var(--uta-blue) !important;
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        border-bottom: 2px solid var(--uta-orange) !important;
     }
     
     /* Divider */
@@ -341,7 +393,7 @@ UTA_CSS = """
         margin: 1.5rem 0;
     }
     
-    /* Footer */
+    /* Footer with accent */
     .app-footer {
         text-align: center;
         padding: 1.5rem;
@@ -349,9 +401,13 @@ UTA_CSS = """
         font-size: 0.8rem;
         border-top: 1px solid var(--border-color);
         margin-top: 2rem;
+        background: linear-gradient(to right, var(--uta-blue), var(--uta-dark-blue));
+        background-size: 100% 3px;
+        background-repeat: no-repeat;
+        background-position: top;
     }
     
-    /* Analysis results card */
+    /* Analysis results card with accent */
     .results-card {
         background-color: white;
         border: 1px solid var(--border-color);
@@ -367,6 +423,7 @@ UTA_CSS = """
         border-radius: 8px;
         padding: 1rem;
         margin-bottom: 1rem;
+        border-left: 3px solid var(--uta-orange);
     }
     
     .field-group-title {
@@ -378,10 +435,11 @@ UTA_CSS = """
         margin-bottom: 0.75rem;
     }
     
-    /* Outcome card */
+    /* Outcome card with accent */
     .outcome-card {
         background-color: white;
         border: 1px solid var(--border-color);
+        border-left: 3px solid var(--uta-blue);
         border-radius: 8px;
         padding: 1rem;
         margin-bottom: 0.75rem;
@@ -397,11 +455,22 @@ UTA_CSS = """
         color: var(--text-muted) !important;
     }
     
-    /* Logo area */
+    /* Logo area with accent bar */
     .logo-area {
         padding: 1rem 0.5rem 1.5rem 0.5rem;
         border-bottom: 1px solid var(--border-color);
         margin-bottom: 1rem;
+        position: relative;
+    }
+    
+    .logo-area::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background-color: var(--uta-orange);
     }
     
     .logo-text {
@@ -434,6 +503,14 @@ UTA_CSS = """
     .status-disconnected {
         background-color: #f3f4f6;
         color: #6b7280;
+    }
+    
+    /* Accent line for visual interest */
+    .accent-line {
+        width: 60px;
+        height: 3px;
+        background-color: var(--uta-orange);
+        margin: 1rem 0;
     }
 </style>
 """
@@ -785,16 +862,12 @@ def check_password():
             <h1 style="color: #003865; font-weight: 700; margin-bottom: 0.5rem;">Assessment Analyzer</h1>
             <p style="color: #5a6777; font-size: 1rem;">Office of Institutional Effectiveness and Reporting</p>
             <p style="color: #8896a6; font-size: 0.875rem;">The University of Texas at Arlington</p>
+            <div style="width: 60px; height: 3px; background-color: #F58025; margin: 1.5rem auto 0 auto;"></div>
         </div>
         """, unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns([1, 1.5, 1])
         with col2:
-            st.markdown("""
-            <div style="background: white; padding: 2rem; border-radius: 12px; 
-                        box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e1e5eb;">
-            """, unsafe_allow_html=True)
-            
             st.text_input(
                 "Password", 
                 type="password", 
@@ -805,8 +878,6 @@ def check_password():
             
             st.markdown("<br>", unsafe_allow_html=True)
             st.caption("Contact your administrator for access credentials.")
-            
-            st.markdown("</div>", unsafe_allow_html=True)
         
         return False
     
@@ -2236,8 +2307,9 @@ def main():
         
         st.divider()
         
-        # Connection status
-        st.markdown('<p style="color: #8896a6; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Status</p>', unsafe_allow_html=True)
+        # Status section - only show full status for admin
+        if st.session_state["admin_mode"]:
+            st.markdown('<p style="color: #8896a6; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Status</p>', unsafe_allow_html=True)
         
         # Load credentials
         if st.session_state["admin_mode"]:
@@ -2274,15 +2346,19 @@ def main():
                 access_token = get_graph_access_token(ms_client_id, ms_client_secret, ms_tenant_id)
                 if access_token:
                     excel_connected = True
-                    st.markdown('<span class="status-pill status-connected">● Excel Connected</span>', unsafe_allow_html=True)
-                else:
-                    st.markdown('<span class="status-pill status-pending">● Excel Error</span>', unsafe_allow_html=True)
-            else:
-                st.markdown('<span class="status-pill status-pending">● Excel Pending</span>', unsafe_allow_html=True)
-        else:
-            st.markdown('<span class="status-pill status-disconnected">○ Excel Not Configured</span>', unsafe_allow_html=True)
         
-        # User mode
+        # Only show connection status for admin
+        if st.session_state["admin_mode"]:
+            if excel_connected:
+                st.markdown('<span class="status-pill status-connected">● Excel Connected</span>', unsafe_allow_html=True)
+            elif ms_client_id and ms_client_id != "pending":
+                st.markdown('<span class="status-pill status-pending">● Excel Error</span>', unsafe_allow_html=True)
+            elif ms_client_id == "pending":
+                st.markdown('<span class="status-pill status-pending">● Excel Pending</span>', unsafe_allow_html=True)
+            else:
+                st.markdown('<span class="status-pill status-disconnected">○ Excel Not Configured</span>', unsafe_allow_html=True)
+        
+        # User mode indicator
         st.markdown("<br>", unsafe_allow_html=True)
         if st.session_state["admin_mode"]:
             st.markdown('<span class="status-pill status-connected">Admin Mode</span>', unsafe_allow_html=True)

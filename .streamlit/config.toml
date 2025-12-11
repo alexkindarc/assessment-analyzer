@@ -1,0 +1,13 @@
+[theme]
+# UTA Brand Colors
+primaryColor = "#0064b1"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f5f7fa"
+textColor = "#003865"
+font = "sans serif"
+
+[server]
+maxUploadSize = 50
+
+[browser]
+gatherUsageStats = false

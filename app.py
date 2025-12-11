@@ -1629,7 +1629,7 @@ def render_metadata_editor(metadata: dict, report_type: str, registry: dict):
     """Render editable metadata preview."""
     
     st.subheader("📝 Review and Edit Metadata")
-    st.caption("Correct any extraction errors before saving to Google Sheets.")
+    st.caption("Correct any extraction errors before saving to Excel Online.")
     
     edited = metadata.copy()
     
@@ -1863,7 +1863,7 @@ def render_metadata_editor(metadata: dict, report_type: str, registry: dict):
     return edited
 
 def prepare_rows_for_sheet(metadata: dict, report_type: str) -> list:
-    """Convert edited metadata to rows for Google Sheets."""
+    """Convert edited metadata to rows for Excel Online."""
     
     now = datetime.now().isoformat()
     rows = []

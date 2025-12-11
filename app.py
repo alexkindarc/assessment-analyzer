@@ -689,16 +689,25 @@ Provide a concise response with TWO sections only:
 2-3 bullet points of what the report does well. Be genuine and specific.
 
 ### ✎ REVISIONS REQUESTED
-Bullet-pointed list of specific revisions needed. Each bullet MUST:
-- **Start with the specific outcome(s) it applies to** (e.g., "Outcome 1:", "Outcomes 2 & 3:", or "All outcomes:")
-- State the issue clearly and briefly
-- Be actionable (they should know exactly what to fix)
-- Use collegial, supportive language
 
-Example format:
-- **Outcome 1:** The criteria for success states "80% will score proficient" but results report an average score instead of a percentage. Please report results in the same format as your criteria.
-- **Outcome 3:** Sample size is missing. Please add n= to indicate how many students were assessed.
-- **All outcomes:** Action steps would benefit from specific timelines (when will changes be implemented?).
+CRITICAL REQUIREMENT: Every single revision bullet MUST begin with the outcome number in bold. No exceptions.
+
+Format each bullet EXACTLY like this:
+- **Outcome 1:** [specific issue and how to fix it]
+- **Outcome 2:** [specific issue and how to fix it]  
+- **Outcomes 1, 2, 3:** [if the same issue applies to multiple outcomes]
+- **All outcomes:** [only if truly applies to every outcome]
+
+DO NOT write generic bullets without outcome numbers. If a revision applies to a specific outcome, identify it by number.
+
+Example of CORRECT format:
+- **Outcome 1:** Results report an average score (78%) but criteria states "75% of students will score 80%+". Please report what percentage of students met the 80% threshold.
+- **Outcome 3:** Sample size missing. Add n= to show how many students were assessed.
+- **Outcomes 2 & 4:** Action steps are identical. Differentiate the improvement plans based on each outcome's specific findings.
+
+Example of WRONG format (do not do this):
+- Consider revising outcomes to use more specific action verbs. ← WRONG: doesn't specify which outcome
+- Add sample sizes where missing. ← WRONG: doesn't specify which outcome
 
 If no revisions needed, say "No revisions needed - report meets all criteria."
 
@@ -836,7 +845,8 @@ def init_session_state():
         "gsheet_connected": False,
         "batch_mode": False,
         "batch_files": [],
-        "batch_metadata": []
+        "batch_metadata": [],
+        "copy_text": None
     }
     for key, value in defaults.items():
         if key not in st.session_state:
@@ -2616,22 +2626,15 @@ def render_analyze_page(api_key, access_token, ms_drive_id, ms_item_id, excel_co
             
             st.caption(f"Cost: {results['cost']} · {results['tokens']['input']} in / {results['tokens']['output']} out tokens")
             
+            # Formatted display
             st.markdown('<div class="results-card">', unsafe_allow_html=True)
             st.markdown(results["analysis"])
             st.markdown('</div>', unsafe_allow_html=True)
             
-            # Copy button using JavaScript
-            analysis_text = results["analysis"].replace("`", "\\`").replace("$", "\\$")
-            st.markdown(f'''
-            <button onclick="navigator.clipboard.writeText(`{analysis_text}`).then(() => this.innerText = '✓ Copied!').catch(() => this.innerText = 'Copy failed')" 
-                    style="background-color: #f0f4f8; border: 1px solid #e1e5eb; border-radius: 6px; 
-                           padding: 0.5rem 1rem; cursor: pointer; font-size: 0.875rem; color: #003865;
-                           margin-top: 0.5rem; transition: all 0.2s ease;"
-                    onmouseover="this.style.backgroundColor='#e1e5eb'" 
-                    onmouseout="this.style.backgroundColor='#f0f4f8'">
-                📋 Copy Analysis
-            </button>
-            ''', unsafe_allow_html=True)
+            # Expandable copy section
+            with st.expander("📋 Copy to clipboard"):
+                st.caption("Click the copy icon in the top-right corner of the box below:")
+                st.code(results["analysis"], language=None)
         else:
             st.info("Upload a report and click 'Analyze Report' to see results.")
         

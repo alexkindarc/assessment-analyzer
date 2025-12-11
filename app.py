@@ -2197,20 +2197,16 @@ def render_admin_panel():
         with reg_tab1:
             if registry["academic"]:
                 df = pd.DataFrame(registry["academic"])
+                # Ensure all columns are strings
+                for col in df.columns:
+                    df[col] = df[col].astype(str).replace('nan', '')
                 
-                # Make editable
+                # Make editable - simplified config
                 edited_df = st.data_editor(
                     df,
                     use_container_width=True,
                     num_rows="dynamic",
-                    column_config={
-                        "unit_id": st.column_config.TextColumn("Unit ID", disabled=True),
-                        "canonical_name": st.column_config.TextColumn("Canonical Name", required=True),
-                        "college_dept": st.column_config.TextColumn("College/Department"),
-                        "unit_type": st.column_config.TextColumn("Type", disabled=True),
-                        "previous_names": st.column_config.TextColumn("Previous Names", help="Semicolon-separated list of previous names"),
-                        "active": st.column_config.SelectboxColumn("Active", options=["Yes", "No"])
-                    },
+                    disabled=["unit_id", "unit_type"],
                     key="academic_editor"
                 )
                 
@@ -2224,20 +2220,16 @@ def render_admin_panel():
         with reg_tab2:
             if registry["administrative"]:
                 df = pd.DataFrame(registry["administrative"])
+                # Ensure all columns are strings
+                for col in df.columns:
+                    df[col] = df[col].astype(str).replace('nan', '')
                 
-                # Make editable
+                # Make editable - simplified config
                 edited_df = st.data_editor(
                     df,
                     use_container_width=True,
                     num_rows="dynamic",
-                    column_config={
-                        "unit_id": st.column_config.TextColumn("Unit ID", disabled=True),
-                        "canonical_name": st.column_config.TextColumn("Canonical Name", required=True),
-                        "college_dept": st.column_config.TextColumn("College/Division"),
-                        "unit_type": st.column_config.TextColumn("Type", disabled=True),
-                        "previous_names": st.column_config.TextColumn("Previous Names", help="Semicolon-separated list of previous names"),
-                        "active": st.column_config.SelectboxColumn("Active", options=["Yes", "No"])
-                    },
+                    disabled=["unit_id", "unit_type"],
                     key="admin_editor"
                 )
                 
@@ -2266,8 +2258,8 @@ def render_admin_panel():
                     )
                     new_academic.append({
                         "unit_id": unit_id,
-                        "canonical_name": row.iloc[1] if len(row) > 1 else "",
-                        "college_dept": row.iloc[0] if len(row) > 0 else "",
+                        "canonical_name": str(row.iloc[1]) if len(row) > 1 else "",
+                        "college_dept": str(row.iloc[0]) if len(row) > 0 else "",
                         "unit_type": "Academic",
                         "previous_names": "",
                         "active": "Yes"
@@ -2289,8 +2281,8 @@ def render_admin_panel():
                     )
                     new_admin.append({
                         "unit_id": unit_id,
-                        "canonical_name": row.iloc[1] if len(row) > 1 else "",
-                        "college_dept": row.iloc[0] if len(row) > 0 else "",
+                        "canonical_name": str(row.iloc[1]) if len(row) > 1 else "",
+                        "college_dept": str(row.iloc[0]) if len(row) > 0 else "",
                         "unit_type": "Administrative",
                         "previous_names": "",
                         "active": "Yes"

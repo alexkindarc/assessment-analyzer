@@ -689,10 +689,16 @@ Provide a concise response with TWO sections only:
 2-3 bullet points of what the report does well. Be genuine and specific.
 
 ### ✎ REVISIONS REQUESTED
-Bullet-pointed list of specific revisions needed. Each bullet should:
+Bullet-pointed list of specific revisions needed. Each bullet MUST:
+- **Start with the specific outcome(s) it applies to** (e.g., "Outcome 1:", "Outcomes 2 & 3:", or "All outcomes:")
 - State the issue clearly and briefly
 - Be actionable (they should know exactly what to fix)
 - Use collegial, supportive language
+
+Example format:
+- **Outcome 1:** The criteria for success states "80% will score proficient" but results report an average score instead of a percentage. Please report results in the same format as your criteria.
+- **Outcome 3:** Sample size is missing. Please add n= to indicate how many students were assessed.
+- **All outcomes:** Action steps would benefit from specific timelines (when will changes be implemented?).
 
 If no revisions needed, say "No revisions needed - report meets all criteria."
 
@@ -2187,7 +2193,7 @@ def render_admin_panel():
     
     with tabs[7]:
         st.subheader("Unit Registry Management")
-        st.caption("View and edit canonical unit names. Changes are saved to session.")
+        st.caption("View, edit, and add unit names. Changes are saved to session.")
         
         registry = load_unit_registry()
         
@@ -2195,53 +2201,130 @@ def render_admin_panel():
         reg_tab1, reg_tab2 = st.tabs(["Academic Units", "Administrative Units"])
         
         with reg_tab1:
+            # Add new academic unit form
+            with st.expander("➕ Add New Academic Unit", expanded=False):
+                new_acad_col1, new_acad_col2 = st.columns(2)
+                with new_acad_col1:
+                    new_acad_name = st.text_input("Unit Name *", key="new_acad_name", placeholder="e.g., Computer Science")
+                    new_acad_college = st.text_input("College/Department *", key="new_acad_college", placeholder="e.g., College of Engineering")
+                with new_acad_col2:
+                    new_acad_prev = st.text_input("Previous Names", key="new_acad_prev", placeholder="Semicolon-separated", help="e.g., CS Department; Comp Sci")
+                    new_acad_active = st.selectbox("Active", ["Yes", "No"], key="new_acad_active")
+                
+                if st.button("Add Academic Unit", key="add_acad_btn"):
+                    if new_acad_name and new_acad_college:
+                        new_unit_id = generate_unit_id(new_acad_name, new_acad_college, "Academic")
+                        new_unit = {
+                            "unit_id": new_unit_id,
+                            "canonical_name": new_acad_name,
+                            "college_dept": new_acad_college,
+                            "unit_type": "Academic",
+                            "previous_names": new_acad_prev,
+                            "active": new_acad_active
+                        }
+                        registry["academic"].append(new_unit)
+                        st.session_state["unit_registry"] = registry
+                        st.success(f"✓ Added: {new_acad_name} (ID: {new_unit_id})")
+                        st.rerun()
+                    else:
+                        st.error("Unit Name and College/Department are required.")
+            
+            # Display existing units
             if registry["academic"]:
                 df = pd.DataFrame(registry["academic"])
                 # Ensure all columns are strings
                 for col in df.columns:
                     df[col] = df[col].astype(str).replace('nan', '')
                 
-                # Make editable - simplified config
+                st.caption(f"{len(df)} academic units")
+                
+                # Make editable
                 edited_df = st.data_editor(
                     df,
                     use_container_width=True,
-                    num_rows="dynamic",
+                    num_rows="fixed",
                     disabled=["unit_id", "unit_type"],
                     key="academic_editor"
                 )
                 
-                if st.button("Save Academic Units", key="save_academic"):
-                    registry["academic"] = edited_df.to_dict('records')
+                if st.button("Save Changes to Academic Units", key="save_academic"):
+                    # Regenerate unit_ids for any changed names
+                    updated_units = []
+                    for record in edited_df.to_dict('records'):
+                        # Regenerate ID if name changed
+                        new_id = generate_unit_id(record.get("canonical_name", ""), record.get("college_dept", ""), "Academic")
+                        record["unit_id"] = new_id
+                        record["unit_type"] = "Academic"
+                        updated_units.append(record)
+                    registry["academic"] = updated_units
                     st.session_state["unit_registry"] = registry
                     st.success("✓ Academic units saved!")
             else:
-                st.info("No academic units loaded.")
+                st.info("No academic units loaded. Add one above or upload a CSV below.")
         
         with reg_tab2:
+            # Add new administrative unit form
+            with st.expander("➕ Add New Administrative Unit", expanded=False):
+                new_admin_col1, new_admin_col2 = st.columns(2)
+                with new_admin_col1:
+                    new_admin_name = st.text_input("Unit Name *", key="new_admin_name", placeholder="e.g., Financial Aid")
+                    new_admin_div = st.text_input("Division *", key="new_admin_div", placeholder="e.g., Student Affairs")
+                with new_admin_col2:
+                    new_admin_prev = st.text_input("Previous Names", key="new_admin_prev", placeholder="Semicolon-separated")
+                    new_admin_active = st.selectbox("Active", ["Yes", "No"], key="new_admin_active")
+                
+                if st.button("Add Administrative Unit", key="add_admin_btn"):
+                    if new_admin_name and new_admin_div:
+                        new_unit_id = generate_unit_id(new_admin_name, new_admin_div, "Administrative")
+                        new_unit = {
+                            "unit_id": new_unit_id,
+                            "canonical_name": new_admin_name,
+                            "college_dept": new_admin_div,
+                            "unit_type": "Administrative",
+                            "previous_names": new_admin_prev,
+                            "active": new_admin_active
+                        }
+                        registry["administrative"].append(new_unit)
+                        st.session_state["unit_registry"] = registry
+                        st.success(f"✓ Added: {new_admin_name} (ID: {new_unit_id})")
+                        st.rerun()
+                    else:
+                        st.error("Unit Name and Division are required.")
+            
+            # Display existing units
             if registry["administrative"]:
                 df = pd.DataFrame(registry["administrative"])
                 # Ensure all columns are strings
                 for col in df.columns:
                     df[col] = df[col].astype(str).replace('nan', '')
                 
-                # Make editable - simplified config
+                st.caption(f"{len(df)} administrative units")
+                
+                # Make editable
                 edited_df = st.data_editor(
                     df,
                     use_container_width=True,
-                    num_rows="dynamic",
+                    num_rows="fixed",
                     disabled=["unit_id", "unit_type"],
                     key="admin_editor"
                 )
                 
-                if st.button("Save Administrative Units", key="save_admin"):
-                    registry["administrative"] = edited_df.to_dict('records')
+                if st.button("Save Changes to Administrative Units", key="save_admin"):
+                    # Regenerate unit_ids for any changed names
+                    updated_units = []
+                    for record in edited_df.to_dict('records'):
+                        new_id = generate_unit_id(record.get("canonical_name", ""), record.get("college_dept", ""), "Administrative")
+                        record["unit_id"] = new_id
+                        record["unit_type"] = "Administrative"
+                        updated_units.append(record)
+                    registry["administrative"] = updated_units
                     st.session_state["unit_registry"] = registry
                     st.success("✓ Administrative units saved!")
             else:
-                st.info("No administrative units loaded.")
+                st.info("No administrative units loaded. Add one above or upload a CSV below.")
         
         st.divider()
-        st.caption("Upload registry files (CSV format: College/Division, Unit Name):")
+        st.caption("**Bulk Upload:** CSV format should have columns: College/Division, Unit Name")
         
         col1, col2 = st.columns(2)
         with col1:
@@ -2252,8 +2335,8 @@ def render_admin_panel():
                 new_academic = []
                 for _, row in df.iterrows():
                     unit_id = generate_unit_id(
-                        row.iloc[1] if len(row) > 1 else "",
-                        row.iloc[0] if len(row) > 0 else "",
+                        str(row.iloc[1]) if len(row) > 1 else "",
+                        str(row.iloc[0]) if len(row) > 0 else "",
                         "Academic"
                     )
                     new_academic.append({
@@ -2275,8 +2358,8 @@ def render_admin_panel():
                 new_admin = []
                 for _, row in df.iterrows():
                     unit_id = generate_unit_id(
-                        row.iloc[1] if len(row) > 1 else "",
-                        row.iloc[0] if len(row) > 0 else "",
+                        str(row.iloc[1]) if len(row) > 1 else "",
+                        str(row.iloc[0]) if len(row) > 0 else "",
                         "Administrative"
                     )
                     new_admin.append({
@@ -2536,6 +2619,19 @@ def render_analyze_page(api_key, access_token, ms_drive_id, ms_item_id, excel_co
             st.markdown('<div class="results-card">', unsafe_allow_html=True)
             st.markdown(results["analysis"])
             st.markdown('</div>', unsafe_allow_html=True)
+            
+            # Copy button using JavaScript
+            analysis_text = results["analysis"].replace("`", "\\`").replace("$", "\\$")
+            st.markdown(f'''
+            <button onclick="navigator.clipboard.writeText(`{analysis_text}`).then(() => this.innerText = '✓ Copied!').catch(() => this.innerText = 'Copy failed')" 
+                    style="background-color: #f0f4f8; border: 1px solid #e1e5eb; border-radius: 6px; 
+                           padding: 0.5rem 1rem; cursor: pointer; font-size: 0.875rem; color: #003865;
+                           margin-top: 0.5rem; transition: all 0.2s ease;"
+                    onmouseover="this.style.backgroundColor='#e1e5eb'" 
+                    onmouseout="this.style.backgroundColor='#f0f4f8'">
+                📋 Copy Analysis
+            </button>
+            ''', unsafe_allow_html=True)
         else:
             st.info("Upload a report and click 'Analyze Report' to see results.")
         

@@ -2187,29 +2187,69 @@ def render_admin_panel():
     
     with tabs[7]:
         st.subheader("Unit Registry Management")
-        st.caption("View and manage canonical unit names.")
+        st.caption("View and edit canonical unit names. Changes are saved to session.")
         
         registry = load_unit_registry()
         
-        # Display current registry
+        # Display and edit registry
         reg_tab1, reg_tab2 = st.tabs(["Academic Units", "Administrative Units"])
         
         with reg_tab1:
             if registry["academic"]:
                 df = pd.DataFrame(registry["academic"])
-                st.dataframe(df, use_container_width=True)
+                
+                # Make editable
+                edited_df = st.data_editor(
+                    df,
+                    use_container_width=True,
+                    num_rows="dynamic",
+                    column_config={
+                        "unit_id": st.column_config.TextColumn("Unit ID", disabled=True),
+                        "canonical_name": st.column_config.TextColumn("Canonical Name", required=True),
+                        "college_dept": st.column_config.TextColumn("College/Department"),
+                        "unit_type": st.column_config.TextColumn("Type", disabled=True),
+                        "previous_names": st.column_config.TextColumn("Previous Names", help="Semicolon-separated list of previous names"),
+                        "active": st.column_config.SelectboxColumn("Active", options=["Yes", "No"])
+                    },
+                    key="academic_editor"
+                )
+                
+                if st.button("Save Academic Units", key="save_academic"):
+                    registry["academic"] = edited_df.to_dict('records')
+                    st.session_state["unit_registry"] = registry
+                    st.success("✓ Academic units saved!")
             else:
                 st.info("No academic units loaded.")
         
         with reg_tab2:
             if registry["administrative"]:
                 df = pd.DataFrame(registry["administrative"])
-                st.dataframe(df, use_container_width=True)
+                
+                # Make editable
+                edited_df = st.data_editor(
+                    df,
+                    use_container_width=True,
+                    num_rows="dynamic",
+                    column_config={
+                        "unit_id": st.column_config.TextColumn("Unit ID", disabled=True),
+                        "canonical_name": st.column_config.TextColumn("Canonical Name", required=True),
+                        "college_dept": st.column_config.TextColumn("College/Division"),
+                        "unit_type": st.column_config.TextColumn("Type", disabled=True),
+                        "previous_names": st.column_config.TextColumn("Previous Names", help="Semicolon-separated list of previous names"),
+                        "active": st.column_config.SelectboxColumn("Active", options=["Yes", "No"])
+                    },
+                    key="admin_editor"
+                )
+                
+                if st.button("Save Administrative Units", key="save_admin"):
+                    registry["administrative"] = edited_df.to_dict('records')
+                    st.session_state["unit_registry"] = registry
+                    st.success("✓ Administrative units saved!")
             else:
                 st.info("No administrative units loaded.")
         
         st.divider()
-        st.caption("Upload updated registry files:")
+        st.caption("Upload registry files (CSV format: College/Division, Unit Name):")
         
         col1, col2 = st.columns(2)
         with col1:

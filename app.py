@@ -882,9 +882,16 @@ def check_password():
         # Inject branding for login page
         inject_uta_branding()
         
-        # Clean login page
+        # Clean login page with logo
+        col_logo1, col_logo2, col_logo3 = st.columns([1, 1, 1])
+        with col_logo2:
+            try:
+                st.image("logo.png", width=200)
+            except:
+                pass  # No logo found, skip
+        
         st.markdown("""
-        <div style="text-align: center; padding: 3rem 0 2rem 0;">
+        <div style="text-align: center; padding: 1rem 0 2rem 0;">
             <h1 style="color: #003865; font-weight: 700; margin-bottom: 0.5rem;">Assessment Analyzer</h1>
             <p style="color: #5a6777; font-size: 1rem;">Office of Institutional Effectiveness and Reporting</p>
             <p style="color: #8896a6; font-size: 0.875rem;">The University of Texas at Arlington</p>
@@ -2407,7 +2414,12 @@ def main():
     
     # Sidebar
     with st.sidebar:
-        # Logo area - clean, bold text
+        # Logo and title area
+        try:
+            st.image("logo.png", width=100)
+        except:
+            pass  # No logo found, skip
+        
         st.markdown("""
         <div class="logo-area">
             <div class="logo-text">Assessment<br>Analyzer</div>

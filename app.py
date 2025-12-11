@@ -2631,10 +2631,15 @@ def render_analyze_page(api_key, access_token, ms_drive_id, ms_item_id, excel_co
             st.markdown(results["analysis"])
             st.markdown('</div>', unsafe_allow_html=True)
             
-            # Expandable copy section
+            # Expandable copy section - plain text version
             with st.expander("📋 Copy to clipboard"):
+                # Convert markdown to plain text
+                plain_text = results["analysis"]
+                plain_text = plain_text.replace("### ", "").replace("## ", "").replace("# ", "")
+                plain_text = plain_text.replace("**", "").replace("*", "")
+                plain_text = plain_text.replace("✓", "STRENGTHS:").replace("✎", "REVISIONS REQUESTED:")
                 st.caption("Click the copy icon in the top-right corner of the box below:")
-                st.code(results["analysis"], language=None)
+                st.code(plain_text, language=None)
         else:
             st.info("Upload a report and click 'Analyze Report' to see results.")
         
